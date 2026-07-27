@@ -195,9 +195,14 @@ def merge_dataframe(
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--probe-value")
+    parser.add_argument("--expect-probe-value")
     args = parser.parse_args()
-    if args.probe_value is not None and not re.fullmatch(r"[a-zA-Z0-9_-]{1,64}", args.probe_value):
-        parser.error("--probe-value must contain only letters, numbers, underscore, or hyphen")
+    for option, value in (
+        ("--probe-value", args.probe_value),
+        ("--expect-probe-value", args.expect_probe_value),
+    ):
+        if value is not None and not re.fullmatch(r"[a-zA-Z0-9_-]{1,64}", value):
+            parser.error(f"{option} must contain only letters, numbers, underscore, or hyphen")
     spark = SparkSession.builder.appName("initialize-iceberg-tables").getOrCreate()
     try:
         create_tables(spark)
@@ -226,6 +231,20 @@ def main() -> int:
             row_count = spark.table("local.raw.valid_rating_events").count()
             print(
                 "CATALOG_PROBE "
+                f"value={property_row['value']} valid_rating_events_rows={row_count}"
+            )
+        if args.expect_probe_value is not None:
+            property_row = spark.sql(
+                "SHOW TBLPROPERTIES local.raw.valid_rating_events ('catalog.probe')"
+            ).first()
+            if property_row is None or property_row["value"] != args.expect_probe_value:
+                observed = None if property_row is None else property_row["value"]
+                raise RuntimeError(
+                    f"catalog.probe expected {args.expect_probe_value!r}, observed {observed!r}"
+                )
+            row_count = spark.table("local.raw.valid_rating_events").count()
+            print(
+                "CATALOG_EXPECT "
                 f"value={property_row['value']} valid_rating_events_rows={row_count}"
             )
     finally:

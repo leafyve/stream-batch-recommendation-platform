@@ -25,7 +25,33 @@ def inspect(image: str) -> dict[str, Any]:
     return cast(list[dict[str, Any]], json.loads(result.stdout))[0]
 
 
+def service_image_id(service: str) -> str | None:
+    container_id = subprocess.run(
+        ["docker", "compose", "ps", "--all", "-q", service],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    if not container_id:
+        return None
+    return subprocess.run(
+        ["docker", "inspect", "--format", "{{.Image}}", container_id],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
 def main() -> int:
+    repository_revision = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
     local_specs: dict[str, dict[str, Any]] = {
         "minio": {
             "image": "tiktok-se-intern-minio:RELEASE.2025-10-15T17-29-55Z",
@@ -80,6 +106,7 @@ def main() -> int:
         "status": "pass",
         "command": "py -3.11 scripts/capture_build_evidence.py",
         "environment": "local Docker Desktop Linux containers",
+        "git_revision": repository_revision,
         "registry_images": {
             "redpanda": (
                 "redpandadata/redpanda:v26.1.13@sha256:"
@@ -99,6 +126,15 @@ def main() -> int:
             ),
         },
         "local_images": local_images,
+        "compose_service_image_ids": {
+            service: service_image_id(service)
+            for service in (
+                "minio",
+                "spark-master",
+                "spark-worker",
+                "streaming-job",
+            )
+        },
         "runs": 1,
         "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
         "limitations": [

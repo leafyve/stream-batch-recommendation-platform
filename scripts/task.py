@@ -137,7 +137,11 @@ def spark_job(module: str, *arguments: str) -> None:
 
 
 def init_tables(args: argparse.Namespace) -> None:
-    arguments = ["--probe-value", args.probe_value] if args.probe_value else []
+    arguments: list[str] = []
+    if args.probe_value:
+        arguments.extend(["--probe-value", args.probe_value])
+    if args.expect_probe_value:
+        arguments.extend(["--expect-probe-value", args.expect_probe_value])
     spark_job("iceberg_tables", *arguments)
 
 
@@ -158,6 +162,8 @@ def test(_: argparse.Namespace) -> None:
             "recommendation_features",
             "--cov-branch",
             "--cov-report=term-missing",
+            f"--cov-report=json:{ROOT / 'reports' / 'runtime' / 'coverage.json'}",
+            f"--junitxml={ROOT / 'reports' / 'runtime' / 'unit-junit.xml'}",
         )
     )
 
@@ -181,12 +187,22 @@ def spark_test(_: argparse.Namespace) -> None:
             "-v",
             "-o",
             "cache_dir=/tmp/pytest-cache",
+            "--junitxml=/reports/runtime/spark-junit.xml",
         ]
     )
 
 
 def integration_test(_: argparse.Namespace) -> None:
-    run(python_command("-m", "pytest", "-m", "integration or e2e", "-v"))
+    run(
+        python_command(
+            "-m",
+            "pytest",
+            "-m",
+            "integration or e2e",
+            "-v",
+            f"--junitxml={ROOT / 'reports' / 'runtime' / 'integration-junit.xml'}",
+        )
+    )
 
 
 def run_stream(_: argparse.Namespace) -> None:
@@ -324,6 +340,7 @@ def parser() -> argparse.ArgumentParser:
             command.add_argument("--output", default="platform-probe.json")
         elif name == "init-tables":
             command.add_argument("--probe-value")
+            command.add_argument("--expect-probe-value")
         elif name == "clean":
             command.add_argument("--volumes", action="store_true")
             command.add_argument("--confirm")

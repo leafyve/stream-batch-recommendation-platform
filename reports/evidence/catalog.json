@@ -1,0 +1,25 @@
+{
+  "command": "py -3.11 scripts/capture_catalog_evidence.py",
+  "configuration": {
+    "catalog_implementation": "org.apache.iceberg.jdbc.JdbcCatalog",
+    "fixture": "apache/iceberg-rest-fixture:1.10.1",
+    "uri": "jdbc:sqlite:/catalog/iceberg_catalog.db?busy_timeout=30000",
+    "volume": "iceberg_catalog:/catalog",
+    "warehouse": "s3://warehouse/"
+  },
+  "container_id_after_restart": "a40e8f86f4cae7ece852c74979cb97108802e7eba8083e9854a8b1c0ce022b6a",
+  "container_id_before_restart": "a40e8f86f4cae7ece852c74979cb97108802e7eba8083e9854a8b1c0ce022b6a",
+  "environment": "local Docker Desktop Linux containers",
+  "first_probe": "catalog-first",
+  "limitations": [
+    "SQLite is a local development catalog with one writer.",
+    "The contract test does not emulate catalog host or disk loss."
+  ],
+  "probe_read_after_restart": "catalog-first",
+  "recorded_at_utc": "2026-07-27T08:40:08.144608+00:00",
+  "repeated_commit_probe": "catalog-repeated",
+  "runs": 3,
+  "sqlite_driver_classpath_evidence": "/usr/lib/iceberg-rest/iceberg-rest-adapter.jar: org/sqlite/JDBC.class",
+  "status": "pass",
+  "tables_readable": 8
+}

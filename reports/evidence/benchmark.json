@@ -1,0 +1,556 @@
+{
+  "command": "py -3.11 scripts/task.py clean --volumes --confirm DELETE_PERSISTENT_DATA; py -3.11 scripts/task.py benchmark",
+  "configuration": {
+    "discovery_rates": [
+      500.0,
+      1500.0,
+      3000.0
+    ],
+    "discovery_records_per_rate": 10000,
+    "full_remainder_duplicate_percentage": 2.0,
+    "full_remainder_out_of_order_percentage": 5.0,
+    "highest_sustainable_rate": 3000.0,
+    "measured_rates": {
+      "high": 3000.0,
+      "low": 750.0,
+      "medium": 1500.0
+    },
+    "measured_records_per_trial": 10000,
+    "measured_trials_per_rate": 3,
+    "out_of_order_delay_seconds": 7200,
+    "spark": {
+      "checkpoint_root": "/checkpoints",
+      "shuffle_partitions": 8,
+      "slide_duration": "1 day",
+      "state_store": "rocksdb",
+      "trigger_interval": "10 seconds",
+      "watermark": "24 hours",
+      "window_duration": "7 days"
+    }
+  },
+  "dataset": {
+    "md5": "c4d9eecfca2ab87c1945afe126590906",
+    "name": "MovieLens 1M",
+    "source_records": 1000209,
+    "source_records_used": 1000209
+  },
+  "discovery": [
+    {
+      "acknowledged": 10000,
+      "actual_events_per_second": 500.00048747547004,
+      "attempted": 10000,
+      "backlog_at_last_producer_ack": {
+        "raw_invalid_ingestion": 7378
+      },
+      "controlled_backlog": true,
+      "injected_duplicates": 0,
+      "last_ack_to_all_queries_committed_seconds": 19.359000000054948,
+      "maximum_query_backlog_at_last_producer_ack": 7378,
+      "phase": "discovery",
+      "reordered_events": 0,
+      "source_records": 10000,
+      "spark": {
+        "input_rows_per_second_median": 302.1921737348904,
+        "micro_batch_duration_ms_p50": 12291.0,
+        "micro_batch_duration_ms_p95": 24750.2,
+        "processed_rows_per_second_median": 279.1032250329697,
+        "progress_records": 9
+      },
+      "start_record": 0,
+      "target_events_per_second": 500.0,
+      "trial": 1
+    },
+    {
+      "acknowledged": 10000,
+      "actual_events_per_second": 1499.9910643282221,
+      "attempted": 10000,
+      "backlog_at_last_producer_ack": {
+        "movie_feature_aggregation": 8841,
+        "raw_invalid_ingestion": 8841,
+        "raw_valid_ingestion": 8841,
+        "user_feature_aggregation": 8841
+      },
+      "controlled_backlog": true,
+      "injected_duplicates": 0,
+      "last_ack_to_all_queries_committed_seconds": 15.077999999979511,
+      "maximum_query_backlog_at_last_producer_ack": 8841,
+      "phase": "discovery",
+      "reordered_events": 0,
+      "source_records": 10000,
+      "spark": {
+        "input_rows_per_second_median": 534.4153034863951,
+        "micro_batch_duration_ms_p50": 3869.5,
+        "micro_batch_duration_ms_p95": 8726.649999999998,
+        "processed_rows_per_second_median": 871.1237253078099,
+        "progress_records": 10
+      },
+      "start_record": 10000,
+      "target_events_per_second": 1500.0,
+      "trial": 2
+    },
+    {
+      "acknowledged": 10000,
+      "actual_events_per_second": 2999.7702676937765,
+      "attempted": 10000,
+      "backlog_at_last_producer_ack": {
+        "movie_feature_aggregation": 10000,
+        "raw_invalid_ingestion": 10000,
+        "raw_valid_ingestion": 10000,
+        "user_feature_aggregation": 10000
+      },
+      "controlled_backlog": true,
+      "injected_duplicates": 0,
+      "last_ack_to_all_queries_committed_seconds": 9.047000000020489,
+      "maximum_query_backlog_at_last_producer_ack": 10000,
+      "phase": "discovery",
+      "reordered_events": 0,
+      "source_records": 10000,
+      "spark": {
+        "input_rows_per_second_median": 1000.0000100000002,
+        "micro_batch_duration_ms_p50": 3729.5,
+        "micro_batch_duration_ms_p95": 7873.5,
+        "processed_rows_per_second_median": 1915.611129657904,
+        "progress_records": 6
+      },
+      "start_record": 20000,
+      "target_events_per_second": 3000.0,
+      "trial": 3
+    }
+  ],
+  "environment": "local Docker Desktop Linux containers",
+  "full_dataset_remainder": {
+    "acknowledged": 897813,
+    "actual_events_per_second": 2999.993122353043,
+    "attempted": 897813,
+    "backlog_at_last_producer_ack": {
+      "movie_feature_aggregation": 50507,
+      "raw_invalid_ingestion": 78781,
+      "raw_valid_ingestion": 83523,
+      "user_feature_aggregation": 68896
+    },
+    "injected_duplicates": 17604,
+    "last_ack_to_all_queries_committed_seconds": 32.14099999994505,
+    "maximum_query_backlog_at_last_producer_ack": 83523,
+    "phase": "full-dataset-remainder",
+    "reordered_events": 44010,
+    "source_records": 880209,
+    "spark": {
+      "input_rows_per_second_median": 3000.0,
+      "micro_batch_duration_ms_p50": 7510.5,
+      "micro_batch_duration_ms_p95": 16188.65,
+      "processed_rows_per_second_median": 3543.7139881622124,
+      "progress_records": 118
+    },
+    "start_record": 120000,
+    "target_events_per_second": 3000.0,
+    "trial": 1
+  },
+  "limitations": [
+    "This is a single-machine local Docker benchmark, not a cluster capacity claim.",
+    "Last-ack-to-commit latency measures the last producer acknowledgement until all four Spark queries commit the corresponding high-watermarks.",
+    "The recovery duration is reused from the separate MovieLens 100K correctness run; the benchmark does not inject another process kill."
+  ],
+  "measured_summary": {
+    "high": {
+      "last_ack_to_commit_seconds_p50": 10.936999999918044,
+      "micro_batch_duration_ms_p50": 3169.0,
+      "micro_batch_duration_ms_p95": 7230.25,
+      "producer_actual_events_per_second_p50": 3000.0203980381175,
+      "runs": 3,
+      "spark_input_rows_per_second_p50": 1000.0,
+      "spark_processed_rows_per_second_p50": 2153.0574756648875,
+      "target_events_per_second": 3000.0
+    },
+    "low": {
+      "last_ack_to_commit_seconds_p50": 12.937000000034459,
+      "micro_batch_duration_ms_p50": 3002.5,
+      "micro_batch_duration_ms_p95": 7640.699999999997,
+      "producer_actual_events_per_second_p50": 750.0365046704054,
+      "runs": 3,
+      "spark_input_rows_per_second_p50": 499.97557499975574,
+      "spark_processed_rows_per_second_p50": 1327.1440701304782,
+      "target_events_per_second": 750.0
+    },
+    "medium": {
+      "last_ack_to_commit_seconds_p50": 17.14000000001397,
+      "micro_batch_duration_ms_p50": 2654.5,
+      "micro_batch_duration_ms_p95": 7031.999999999998,
+      "producer_actual_events_per_second_p50": 1500.0228559983634,
+      "runs": 3,
+      "spark_input_rows_per_second_p50": 499.98943499989434,
+      "spark_processed_rows_per_second_p50": 1736.4415179835742,
+      "target_events_per_second": 1500.0
+    }
+  },
+  "measured_trials": {
+    "high": [
+      {
+        "acknowledged": 10000,
+        "actual_events_per_second": 3000.043271124767,
+        "attempted": 10000,
+        "backlog_at_last_producer_ack": {
+          "movie_feature_aggregation": 10000,
+          "raw_invalid_ingestion": 10000,
+          "raw_valid_ingestion": 10000,
+          "user_feature_aggregation": 10000
+        },
+        "injected_duplicates": 0,
+        "last_ack_to_all_queries_committed_seconds": 10.890999999945052,
+        "maximum_query_backlog_at_last_producer_ack": 10000,
+        "phase": "high",
+        "reordered_events": 0,
+        "source_records": 10000,
+        "spark": {
+          "input_rows_per_second_median": 1000.0,
+          "micro_batch_duration_ms_p50": 2969.5,
+          "micro_batch_duration_ms_p95": 6997.25,
+          "processed_rows_per_second_median": 2221.0344637713633,
+          "progress_records": 6
+        },
+        "start_record": 90000,
+        "target_events_per_second": 3000.0,
+        "trial": 1
+      },
+      {
+        "acknowledged": 10000,
+        "actual_events_per_second": 3000.0022584001904,
+        "attempted": 10000,
+        "backlog_at_last_producer_ack": {
+          "movie_feature_aggregation": 10000,
+          "raw_invalid_ingestion": 10000,
+          "raw_valid_ingestion": 10000,
+          "user_feature_aggregation": 10000
+        },
+        "injected_duplicates": 0,
+        "last_ack_to_all_queries_committed_seconds": 13.015999999945052,
+        "maximum_query_backlog_at_last_producer_ack": 10000,
+        "phase": "high",
+        "reordered_events": 0,
+        "source_records": 10000,
+        "spark": {
+          "input_rows_per_second_median": 1000.0,
+          "micro_batch_duration_ms_p50": 3291.0,
+          "micro_batch_duration_ms_p95": 7403.5,
+          "processed_rows_per_second_median": 2082.8339939440816,
+          "progress_records": 6
+        },
+        "start_record": 100000,
+        "target_events_per_second": 3000.0,
+        "trial": 2
+      },
+      {
+        "acknowledged": 10000,
+        "actual_events_per_second": 3000.0203980381175,
+        "attempted": 10000,
+        "backlog_at_last_producer_ack": {
+          "movie_feature_aggregation": 10000,
+          "raw_invalid_ingestion": 10000,
+          "raw_valid_ingestion": 10000,
+          "user_feature_aggregation": 10000
+        },
+        "injected_duplicates": 0,
+        "last_ack_to_all_queries_committed_seconds": 10.936999999918044,
+        "maximum_query_backlog_at_last_producer_ack": 10000,
+        "phase": "high",
+        "reordered_events": 0,
+        "source_records": 10000,
+        "spark": {
+          "input_rows_per_second_median": 1000.0,
+          "micro_batch_duration_ms_p50": 3169.0,
+          "micro_batch_duration_ms_p95": 7230.25,
+          "processed_rows_per_second_median": 2153.0574756648875,
+          "progress_records": 6
+        },
+        "start_record": 110000,
+        "target_events_per_second": 3000.0,
+        "trial": 3
+      }
+    ],
+    "low": [
+      {
+        "acknowledged": 10000,
+        "actual_events_per_second": 750.0467651345557,
+        "attempted": 10000,
+        "backlog_at_last_producer_ack": {
+          "movie_feature_aggregation": 5792,
+          "raw_invalid_ingestion": 5792,
+          "raw_valid_ingestion": 5792,
+          "user_feature_aggregation": 5792
+        },
+        "injected_duplicates": 0,
+        "last_ack_to_all_queries_committed_seconds": 12.937000000034459,
+        "maximum_query_backlog_at_last_producer_ack": 5792,
+        "phase": "low",
+        "reordered_events": 0,
+        "source_records": 10000,
+        "spark": {
+          "input_rows_per_second_median": 499.99208499992085,
+          "micro_batch_duration_ms_p50": 3268.0,
+          "micro_batch_duration_ms_p95": 8130.849999999998,
+          "processed_rows_per_second_median": 1327.1440701304782,
+          "progress_records": 10
+        },
+        "start_record": 30000,
+        "target_events_per_second": 750.0,
+        "trial": 1
+      },
+      {
+        "acknowledged": 10000,
+        "actual_events_per_second": 750.0365046704054,
+        "attempted": 10000,
+        "backlog_at_last_producer_ack": {
+          "movie_feature_aggregation": 7443,
+          "raw_invalid_ingestion": 7443,
+          "raw_valid_ingestion": 7443,
+          "user_feature_aggregation": 7443
+        },
+        "injected_duplicates": 0,
+        "last_ack_to_all_queries_committed_seconds": 8.844000000040978,
+        "maximum_query_backlog_at_last_producer_ack": 7443,
+        "phase": "low",
+        "reordered_events": 0,
+        "source_records": 10000,
+        "spark": {
+          "input_rows_per_second_median": 499.97557499975574,
+          "micro_batch_duration_ms_p50": 3002.5,
+          "micro_batch_duration_ms_p95": 7640.699999999997,
+          "processed_rows_per_second_median": 1179.244794438226,
+          "progress_records": 10
+        },
+        "start_record": 40000,
+        "target_events_per_second": 750.0,
+        "trial": 2
+      },
+      {
+        "acknowledged": 10000,
+        "actual_events_per_second": 750.026574866602,
+        "attempted": 10000,
+        "backlog_at_last_producer_ack": {
+          "movie_feature_aggregation": 5718,
+          "raw_invalid_ingestion": 5718,
+          "raw_valid_ingestion": 5718,
+          "user_feature_aggregation": 5718
+        },
+        "injected_duplicates": 0,
+        "last_ack_to_all_queries_committed_seconds": 13.155999999959022,
+        "maximum_query_backlog_at_last_producer_ack": 5718,
+        "phase": "low",
+        "reordered_events": 0,
+        "source_records": 10000,
+        "spark": {
+          "input_rows_per_second_median": 499.9714128587142,
+          "micro_batch_duration_ms_p50": 2960.5,
+          "micro_batch_duration_ms_p95": 7608.749999999997,
+          "processed_rows_per_second_median": 1383.2047104600701,
+          "progress_records": 10
+        },
+        "start_record": 50000,
+        "target_events_per_second": 750.0,
+        "trial": 3
+      }
+    ],
+    "medium": [
+      {
+        "acknowledged": 10000,
+        "actual_events_per_second": 1500.0291494665073,
+        "attempted": 10000,
+        "backlog_at_last_producer_ack": {
+          "movie_feature_aggregation": 3943,
+          "raw_invalid_ingestion": 3943,
+          "raw_valid_ingestion": 3943,
+          "user_feature_aggregation": 10000
+        },
+        "injected_duplicates": 0,
+        "last_ack_to_all_queries_committed_seconds": 17.063000000081956,
+        "maximum_query_backlog_at_last_producer_ack": 10000,
+        "phase": "medium",
+        "reordered_events": 0,
+        "source_records": 10000,
+        "spark": {
+          "input_rows_per_second_median": 499.98943499989434,
+          "micro_batch_duration_ms_p50": 2325.0,
+          "micro_batch_duration_ms_p95": 7031.999999999998,
+          "processed_rows_per_second_median": 1850.2445273235862,
+          "progress_records": 10
+        },
+        "start_record": 60000,
+        "target_events_per_second": 1500.0,
+        "trial": 1
+      },
+      {
+        "acknowledged": 10000,
+        "actual_events_per_second": 1499.3697675814958,
+        "attempted": 10000,
+        "backlog_at_last_producer_ack": {
+          "movie_feature_aggregation": 10000,
+          "raw_invalid_ingestion": 10000,
+          "raw_valid_ingestion": 2447,
+          "user_feature_aggregation": 10000
+        },
+        "injected_duplicates": 0,
+        "last_ack_to_all_queries_committed_seconds": 17.14000000001397,
+        "maximum_query_backlog_at_last_producer_ack": 10000,
+        "phase": "medium",
+        "reordered_events": 0,
+        "source_records": 10000,
+        "spark": {
+          "input_rows_per_second_median": 500.0,
+          "micro_batch_duration_ms_p50": 2654.5,
+          "micro_batch_duration_ms_p95": 7403.149999999998,
+          "processed_rows_per_second_median": 1736.4415179835742,
+          "progress_records": 10
+        },
+        "start_record": 70000,
+        "target_events_per_second": 1500.0,
+        "trial": 2
+      },
+      {
+        "acknowledged": 10000,
+        "actual_events_per_second": 1500.0228559983634,
+        "attempted": 10000,
+        "backlog_at_last_producer_ack": {
+          "movie_feature_aggregation": 10000,
+          "raw_invalid_ingestion": 10000,
+          "raw_valid_ingestion": 10000,
+          "user_feature_aggregation": 10000
+        },
+        "injected_duplicates": 0,
+        "last_ack_to_all_queries_committed_seconds": 17.265999999945052,
+        "maximum_query_backlog_at_last_producer_ack": 10000,
+        "phase": "medium",
+        "reordered_events": 0,
+        "source_records": 10000,
+        "spark": {
+          "input_rows_per_second_median": 499.96620499966207,
+          "micro_batch_duration_ms_p50": 2836.0,
+          "micro_batch_duration_ms_p95": 6083.499999999999,
+          "processed_rows_per_second_median": 1471.426468625275,
+          "progress_records": 10
+        },
+        "start_record": 80000,
+        "target_events_per_second": 1500.0,
+        "trial": 3
+      }
+    ]
+  },
+  "outcomes": {
+    "deduplicated_valid_rows": 1000209,
+    "injected_duplicates": 17604,
+    "invalid_rows": 0,
+    "parity": [
+      {
+        "entity_type": "user",
+        "exact_value_mismatches": 0,
+        "expected_rows": 126292,
+        "floating_point_mismatches": 0,
+        "missing_streaming_keys": 0,
+        "parity_percentage": 100.0,
+        "status": "pass",
+        "streaming_rows": 126292,
+        "unexpected_streaming_keys": 0,
+        "watermark": "2003-02-27 00:00:00"
+      },
+      {
+        "entity_type": "movie",
+        "exact_value_mismatches": 0,
+        "expected_rows": 1074950,
+        "floating_point_mismatches": 0,
+        "missing_streaming_keys": 0,
+        "parity_percentage": 100.0,
+        "status": "pass",
+        "streaming_rows": 1074950,
+        "unexpected_streaming_keys": 0,
+        "watermark": "2003-01-03 00:00:00"
+      }
+    ],
+    "process_restart_recovery_seconds_from_100k_correctness_run": 12.561999999918044,
+    "producer_attempted_messages": 1017813,
+    "reordered_events": 44010,
+    "table_counts": {
+      "local.audit.parity_results": 2,
+      "local.audit.pipeline_runs": 1,
+      "local.features.movie_batch_features": 1095665,
+      "local.features.movie_stream_features": 1074950,
+      "local.features.user_batch_features": 126458,
+      "local.features.user_stream_features": 126292,
+      "local.raw.invalid_rating_events": 0,
+      "local.raw.valid_rating_events": 1000209
+    }
+  },
+  "overall_spark": {
+    "input_rows_per_second_median": 2999.2,
+    "micro_batch_duration_ms_p50": 5135.5,
+    "micro_batch_duration_ms_p95": 15802.099999999999,
+    "processed_rows_per_second_median": 2868.2945344129553,
+    "progress_records": 222
+  },
+  "recorded_at_utc": "2026-07-27T08:37:31.970443+00:00",
+  "resources": {
+    "container_limits": {
+      "iceberg-rest": {
+        "memory_bytes": 805306368,
+        "nano_cpus": 750000000
+      },
+      "minio": {
+        "memory_bytes": 1073741824,
+        "nano_cpus": 1000000000
+      },
+      "redpanda": {
+        "memory_bytes": 1610612736,
+        "nano_cpus": 1500000000
+      },
+      "spark-master": {
+        "memory_bytes": 805306368,
+        "nano_cpus": 500000000
+      },
+      "spark-worker": {
+        "memory_bytes": 7516192768,
+        "nano_cpus": 4000000000
+      }
+    },
+    "container_snapshot": [
+      {
+        "cpu": "0.10%",
+        "memory": "242.2MiB / 768MiB",
+        "name": "tiktok-se-intern-iceberg-rest-1"
+      },
+      {
+        "cpu": "0.08%",
+        "memory": "340.2MiB / 7GiB",
+        "name": "tiktok-se-intern-spark-worker-1"
+      },
+      {
+        "cpu": "1.75%",
+        "memory": "44.4MiB / 256MiB",
+        "name": "tiktok-se-intern-console-1"
+      },
+      {
+        "cpu": "5.97%",
+        "memory": "285MiB / 768MiB",
+        "name": "tiktok-se-intern-spark-master-1"
+      },
+      {
+        "cpu": "0.28%",
+        "memory": "520.6MiB / 1.5GiB",
+        "name": "tiktok-se-intern-redpanda-1"
+      },
+      {
+        "cpu": "0.03%",
+        "memory": "463.3MiB / 1GiB",
+        "name": "tiktok-se-intern-minio-1"
+      }
+    ],
+    "docker_cpus": 8,
+    "docker_memory_bytes": 16770523136,
+    "docker_server_version": "29.6.2",
+    "host_logical_processors": 20,
+    "host_physical_memory_bytes": 34049220608
+  },
+  "runs": {
+    "discovery": 3,
+    "full_dataset": 1,
+    "measured_per_rate": 3
+  },
+  "started_at_utc": "2026-07-27T08:23:01.473261+00:00",
+  "status": "pass"
+}

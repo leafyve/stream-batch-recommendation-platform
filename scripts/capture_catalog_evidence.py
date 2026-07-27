@@ -40,6 +40,17 @@ def probe(value: str) -> str:
     )
 
 
+def expect_probe(value: str) -> str:
+    return run(
+        [
+            *TASK,
+            "init-tables",
+            "--expect-probe-value",
+            value,
+        ]
+    )
+
+
 def main() -> int:
     first = probe("catalog-first")
     before_id = run(
@@ -50,7 +61,7 @@ def main() -> int:
     after_id = run(
         ["docker", "compose", "ps", "-q", "iceberg-rest"]
     ).strip()
-    after_restart = probe("catalog-first")
+    after_restart = expect_probe("catalog-first")
     repeated = probe("catalog-repeated")
     classpath = run(
         [
@@ -68,7 +79,7 @@ def main() -> int:
     ).strip()
     for expected, content in (
         ("value=catalog-first", first),
-        ("value=catalog-first", after_restart),
+        ("CATALOG_EXPECT value=catalog-first", after_restart),
         ("value=catalog-repeated", repeated),
     ):
         if expected not in content:
