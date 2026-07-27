@@ -144,9 +144,17 @@ def main() -> int:
             ]
         )
         run([*python, "benchmark"])
-        run([*python, "probe", "--output", "contract-probe-before.json"])
         run([*python, "run-stream"])
         clone_python = str(clone / ".venv" / "Scripts" / "python.exe")
+        run(
+            [
+                clone_python,
+                "scripts/inject_contract_events.py",
+                "--advance-watermark-only",
+            ]
+        )
+        run([clone_python, "scripts/wait_for_stream.py"])
+        run([*python, "probe", "--output", "contract-probe-before.json"])
         run([clone_python, "scripts/inject_contract_events.py"])
         run([clone_python, "scripts/wait_for_stream.py"])
         run(["docker", "compose", "--profile", "jobs", "stop", "-t", "60", "streaming-job"])

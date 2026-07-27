@@ -94,10 +94,14 @@ def main() -> int:
         ),
         "environment": "local Docker Desktop Linux containers",
         "dataset": {
-            "name": "MovieLens 100K plus three synthetic schema-contract records",
-            "md5": "0e33842e24a9c977be4e0107933c0723",
+            "name": (
+                "MovieLens 1M plus one watermark-finalization marker and "
+                "three synthetic schema-contract records"
+            ),
+            "md5": "c4d9eecfca2ab87c1945afe126590906",
         },
         "configuration": {
+            "watermark_finalization_marker_records": 1,
             "published_records": 3,
             "malformed_json_records": 1,
             "invalid_rating_records": 1,
@@ -154,6 +158,8 @@ def main() -> int:
         evidence["observed"]["new_valid_rows"] != 1
         or evidence["observed"]["new_invalid_rows"] != 2
         or evidence["observed"]["dlq_messages"] != 2
+        or evidence["observed"]["user_feature_row_change"] != 0
+        or evidence["observed"]["movie_feature_row_change"] != 0
         or set(late_progress)
         != {"user_feature_aggregation", "movie_feature_aggregation"}
     ):

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 from datetime import datetime, timezone
 
@@ -13,6 +14,13 @@ TOPIC = "rating-events"
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--advance-watermark-only",
+        action="store_true",
+        help="publish one future-dated valid marker so earlier feature windows finalize",
+    )
+    args = parser.parse_args()
     producer = Producer(
         {
             "bootstrap.servers": "localhost:19092",
@@ -25,6 +33,39 @@ def main() -> int:
     def delivered(error: KafkaError | None, _message: Message) -> None:
         if error is not None:
             failures.append(str(error))
+
+    if args.advance_watermark_only:
+        marker = RatingEvent.create(
+            user_id=9_000_000,
+            movie_id=9_000_000,
+            rating=4.0,
+            event_time="2035-01-01T00:00:00Z",
+            ingestion_time=datetime.now(timezone.utc),
+            source="contract-test",
+            replay_run_id="watermark-finalization-marker",
+        )
+        producer.produce(
+            TOPIC,
+            key=b"contract-watermark-marker",
+            value=marker.to_json(),
+            on_delivery=delivered,
+        )
+        remaining = producer.flush(30)
+        if failures or remaining:
+            raise RuntimeError(f"delivery failures={failures!r} remaining={remaining}")
+        print(
+            json.dumps(
+                {
+                    "status": "pass",
+                    "published": 1,
+                    "watermark_finalization_marker": 1,
+                    "marker_event_id": marker.event_id,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
 
     invalid_rating = {
         "event_id": "0" * 64,
