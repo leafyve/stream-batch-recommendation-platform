@@ -1,0 +1,202 @@
+{
+  "checkpoint_file_count_before_kill": 256,
+  "command": "py -3.11 scripts/task.py recovery-test",
+  "configuration": {
+    "duplicate_percentage": 5,
+    "out_of_order_delay_seconds": 7200,
+    "out_of_order_percentage": 10,
+    "segment_one_records": 25000,
+    "segment_two_records": 75000,
+    "target_events_per_second": 3000
+  },
+  "dataset": {
+    "md5": "0e33842e24a9c977be4e0107933c0723",
+    "name": "ml-100k",
+    "source_records": 100000
+  },
+  "environment": "local Docker Desktop Linux containers",
+  "limitations": [
+    "This proves one streaming-process/container restart only.",
+    "It does not prove broker failure, cluster failover, or high availability."
+  ],
+  "parity_results": [
+    {
+      "entity_type": "user",
+      "exact_value_mismatches": 0,
+      "expected_rows": 13770,
+      "floating_point_mismatches": 0,
+      "missing_streaming_keys": 0,
+      "parity_percentage": 100.0,
+      "status": "pass",
+      "streaming_rows": 13770,
+      "unexpected_streaming_keys": 0,
+      "watermark": "1998-04-21 00:00:00"
+    },
+    {
+      "entity_type": "movie",
+      "exact_value_mismatches": 0,
+      "expected_rows": 184605,
+      "floating_point_mismatches": 0,
+      "missing_streaming_keys": 0,
+      "parity_percentage": 100.0,
+      "status": "pass",
+      "streaming_rows": 184605,
+      "unexpected_streaming_keys": 0,
+      "watermark": "1998-04-21 00:00:00"
+    }
+  ],
+  "probe_after_storage_restart": {
+    "invalid_event_uniqueness": {
+      "duplicate_invalid_record_ids": 0,
+      "rows": 0,
+      "unique_invalid_record_ids": 0
+    },
+    "movie_batch_features": {
+      "duplicate_logical_keys": 0,
+      "maximum_window_end": "1998-04-29 00:00:00",
+      "rows": 189880,
+      "unique_logical_keys": 189880
+    },
+    "movie_stream_features": {
+      "duplicate_logical_keys": 0,
+      "maximum_window_end": "1998-04-21 00:00:00",
+      "rows": 184605,
+      "unique_logical_keys": 184605
+    },
+    "status": "pass",
+    "table_counts": {
+      "local.audit.parity_results": 2,
+      "local.audit.pipeline_runs": 2,
+      "local.features.movie_batch_features": 189880,
+      "local.features.movie_stream_features": 184605,
+      "local.features.user_batch_features": 14046,
+      "local.features.user_stream_features": 13770,
+      "local.raw.invalid_rating_events": 0,
+      "local.raw.valid_rating_events": 100000
+    },
+    "user_batch_features": {
+      "duplicate_logical_keys": 0,
+      "maximum_window_end": "1998-04-29 00:00:00",
+      "rows": 14046,
+      "unique_logical_keys": 14046
+    },
+    "user_stream_features": {
+      "duplicate_logical_keys": 0,
+      "maximum_window_end": "1998-04-21 00:00:00",
+      "rows": 13770,
+      "unique_logical_keys": 13770
+    },
+    "valid_event_uniqueness": {
+      "duplicate_event_ids": 0,
+      "rows": 100000,
+      "unique_event_ids": 100000
+    }
+  },
+  "probe_before_storage_restart": {
+    "invalid_event_uniqueness": {
+      "duplicate_invalid_record_ids": 0,
+      "rows": 0,
+      "unique_invalid_record_ids": 0
+    },
+    "movie_batch_features": {
+      "duplicate_logical_keys": 0,
+      "maximum_window_end": "1998-04-29 00:00:00",
+      "rows": 189880,
+      "unique_logical_keys": 189880
+    },
+    "movie_stream_features": {
+      "duplicate_logical_keys": 0,
+      "maximum_window_end": "1998-04-21 00:00:00",
+      "rows": 184605,
+      "unique_logical_keys": 184605
+    },
+    "status": "pass",
+    "table_counts": {
+      "local.audit.parity_results": 2,
+      "local.audit.pipeline_runs": 2,
+      "local.features.movie_batch_features": 189880,
+      "local.features.movie_stream_features": 184605,
+      "local.features.user_batch_features": 14046,
+      "local.features.user_stream_features": 13770,
+      "local.raw.invalid_rating_events": 0,
+      "local.raw.valid_rating_events": 100000
+    },
+    "user_batch_features": {
+      "duplicate_logical_keys": 0,
+      "maximum_window_end": "1998-04-29 00:00:00",
+      "rows": 14046,
+      "unique_logical_keys": 14046
+    },
+    "user_stream_features": {
+      "duplicate_logical_keys": 0,
+      "maximum_window_end": "1998-04-21 00:00:00",
+      "rows": 13770,
+      "unique_logical_keys": 13770
+    },
+    "valid_event_uniqueness": {
+      "duplicate_event_ids": 0,
+      "rows": 100000,
+      "unique_event_ids": 100000
+    }
+  },
+  "process_restart_recovery_seconds": 12.561999999918044,
+  "query_run_ids_after_restart": {
+    "movie_feature_aggregation": "928360dd-c6ca-4947-b242-f9958d0f720e",
+    "raw_invalid_ingestion": "3edef298-ff41-4626-b1f0-ea7355889b5f",
+    "raw_valid_ingestion": "411a75aa-b2e3-4aee-803e-1d5d8777c524",
+    "user_feature_aggregation": "a35ec554-6dc2-40bb-9ad8-c40156b42144"
+  },
+  "query_run_ids_before_kill": {
+    "movie_feature_aggregation": "0df65e5a-85df-4aac-b90a-947e03aa0bac",
+    "raw_invalid_ingestion": "47b406b7-b5e0-4e28-9fe1-7de520c1b5e5",
+    "raw_valid_ingestion": "b8635b7d-4b16-4810-8e74-821c982e8842",
+    "user_feature_aggregation": "adfd0d24-6bb1-482c-8043-24b73437d16f"
+  },
+  "recorded_at_utc": "2026-07-27T07:55:10.430427+00:00",
+  "runs": 1,
+  "segments": [
+    {
+      "acknowledged": 26250,
+      "actual_events_per_second": 2999.8147869784234,
+      "attempted": 26250,
+      "elapsed_seconds": 8.750540237999303,
+      "failed": 0,
+      "injected_duplicates": 1250,
+      "random_seed": 169849,
+      "reordered_events": 2500,
+      "replay_run_id": "recovery-segment-one",
+      "source_records": 25000,
+      "stopped_by_signal": false,
+      "topic": "rating-events"
+    },
+    {
+      "acknowledged": 78750,
+      "actual_events_per_second": 2999.9685337014757,
+      "attempted": 78750,
+      "elapsed_seconds": 26.25027533299999,
+      "failed": 0,
+      "injected_duplicates": 3750,
+      "random_seed": 169849,
+      "reordered_events": 7500,
+      "replay_run_id": "recovery-segment-two",
+      "source_records": 75000,
+      "stopped_by_signal": false,
+      "topic": "rating-events"
+    }
+  ],
+  "started_at_utc": "2026-07-27T07:49:55.415617+00:00",
+  "status": "pass",
+  "storage_restart_counts_preserved": true,
+  "streaming_container_after": {
+    "id": "251da0c73b068440cbb794cdf4114c9913a94ea895e57de6de9da8bca3ec9e03",
+    "restart_count": 0,
+    "started_at": "2026-07-27T07:51:45.27581426Z",
+    "status": "running"
+  },
+  "streaming_container_before": {
+    "id": "251da0c73b068440cbb794cdf4114c9913a94ea895e57de6de9da8bca3ec9e03",
+    "restart_count": 0,
+    "started_at": "2026-07-27T07:50:53.885428891Z",
+    "status": "running"
+  }
+}
