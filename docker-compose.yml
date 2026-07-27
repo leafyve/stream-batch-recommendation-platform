@@ -1,0 +1,293 @@
+name: tiktok-se-intern
+
+x-local-environment: &local-environment
+  MINIO_ROOT_USER: ${MINIO_ROOT_USER:-localminio}
+  MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-localminio123}
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-localminio}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-localminio123}
+  AWS_REGION: ${AWS_REGION:-us-east-1}
+
+x-spark-common: &spark-common
+  build:
+    context: .
+    dockerfile: docker/spark/Dockerfile
+  image: tiktok-se-intern-spark:local
+  environment:
+    <<: *local-environment
+    PYTHONPATH: /opt/app/src:/opt/spark/python/lib/pyspark.zip:/opt/spark/python/lib/py4j-0.10.9.7-src.zip
+  volumes:
+    - spark_checkpoints:/checkpoints
+    - ./reports/runtime:/reports/runtime
+    - ./data:/data:ro
+  networks: [platform]
+
+services:
+  redpanda:
+    image: redpandadata/redpanda:v26.1.13@sha256:ae0a858eddd0538dacbba5696f9be1f590de1fe51283964afc85f5510fa8f32e
+    command:
+      - redpanda
+      - start
+      - --kafka-addr=internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr=internal://redpanda:9092,external://localhost:19092
+      - --pandaproxy-addr=internal://0.0.0.0:8082
+      - --advertise-pandaproxy-addr=internal://redpanda:8082
+      - --schema-registry-addr=internal://0.0.0.0:8081
+      - --rpc-addr=redpanda:33145
+      - --advertise-rpc-addr=redpanda:33145
+      - --mode=dev-container
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --overprovisioned
+    ports:
+      - "127.0.0.1:19092:19092"
+      - "127.0.0.1:19644:9644"
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
+    healthcheck:
+      test: ["CMD", "rpk", "cluster", "health", "--exit-when-healthy"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+    cpus: 1.5
+    mem_limit: 1536m
+    networks: [platform]
+
+  console:
+    image: redpandadata/console:v3.8.0@sha256:4aa45603b7b9c57b7b8073289be4f880edb929599a8d3e17260e98d7ee7bcdd7
+    environment:
+      KAFKA_BROKERS: redpanda:9092
+    ports:
+      - "127.0.0.1:18080:8080"
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://127.0.0.1:8080/"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+    cpus: 0.5
+    mem_limit: 256m
+    networks: [platform]
+
+  minio:
+    build:
+      context: .
+      dockerfile: docker/minio/Dockerfile
+      args:
+        MINIO_RELEASE: RELEASE.2025-10-15T17-29-55Z
+        MINIO_COMMIT: 9e49d5e7a648f00e26f2246f4dc28e6b07f8c84a
+    image: tiktok-se-intern-minio:RELEASE.2025-10-15T17-29-55Z
+    environment:
+      <<: *local-environment
+    ports:
+      - "127.0.0.1:19000:9000"
+      - "127.0.0.1:19001:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:9000/minio/health/live', timeout=2)",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+    cpus: 1.0
+    mem_limit: 1g
+    networks: [platform]
+
+  minio-init:
+    image: minio/mc:RELEASE.2025-08-13T08-35-41Z@sha256:a7fe349ef4bd8521fb8497f55c6042871b2ae640607cf99d9bede5e9bdf11727
+    environment:
+      <<: *local-environment
+    entrypoint: ["/bin/sh", "-ec"]
+    command:
+      - |
+        mc alias set local http://minio:9000 "$${MINIO_ROOT_USER}" "$${MINIO_ROOT_PASSWORD}"
+        mc mb --ignore-existing local/warehouse
+        mc anonymous set none local/warehouse
+        mc stat local/warehouse
+    depends_on:
+      minio:
+        condition: service_healthy
+    restart: "no"
+    networks: [platform]
+
+  catalog-volume-init:
+    image: apache/iceberg-rest-fixture:1.10.1@sha256:f7d679d30ac9c640bdeb2c015dff533cd3c8f1c7d491ebcb5d436f9a42db1d6f
+    user: "0:0"
+    entrypoint: ["/bin/sh", "-ec"]
+    command: ["chown -R 1000:1000 /catalog && chmod 750 /catalog"]
+    volumes:
+      - iceberg_catalog:/catalog
+    restart: "no"
+    networks: [platform]
+
+  iceberg-rest:
+    image: apache/iceberg-rest-fixture:1.10.1@sha256:f7d679d30ac9c640bdeb2c015dff533cd3c8f1c7d491ebcb5d436f9a42db1d6f
+    environment:
+      <<: *local-environment
+      CATALOG_CATALOG__IMPL: org.apache.iceberg.jdbc.JdbcCatalog
+      # The four streaming queries can reach the REST service concurrently.
+      # Wait for SQLite's single writer instead of surfacing SQLITE_BUSY as an
+      # Iceberg commit with unknown state.
+      CATALOG_URI: jdbc:sqlite:/catalog/iceberg_catalog.db?busy_timeout=30000
+      CATALOG_JDBC_USER: local
+      CATALOG_JDBC_PASSWORD: local
+      CATALOG_JDBC_STRICT__MODE: "true"
+      CATALOG_WAREHOUSE: s3://warehouse/
+      CATALOG_IO__IMPL: org.apache.iceberg.aws.s3.S3FileIO
+      CATALOG_S3_ENDPOINT: http://minio:9000
+      CATALOG_S3_PATH__STYLE__ACCESS: "true"
+      CATALOG_CLIENT_REGION: us-east-1
+    ports:
+      - "127.0.0.1:18181:8181"
+    volumes:
+      - iceberg_catalog:/catalog
+    depends_on:
+      catalog-volume-init:
+        condition: service_completed_successfully
+      minio-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://127.0.0.1:8181/v1/config"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+    cpus: 0.75
+    mem_limit: 768m
+    networks: [platform]
+
+  spark-master:
+    <<: *spark-common
+    command: ["/opt/spark/bin/spark-class", "org.apache.spark.deploy.master.Master"]
+    environment:
+      <<: *local-environment
+      SPARK_NO_DAEMONIZE: "true"
+      SPARK_MASTER_HOST: spark-master
+      PYTHONPATH: /opt/app/src:/opt/spark/python/lib/pyspark.zip:/opt/spark/python/lib/py4j-0.10.9.7-src.zip
+    ports:
+      - "127.0.0.1:18088:8080"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python3",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080', timeout=2)",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+    cpus: 0.5
+    mem_limit: 768m
+
+  spark-worker:
+    <<: *spark-common
+    command:
+      [
+        "/opt/spark/bin/spark-class",
+        "org.apache.spark.deploy.worker.Worker",
+        "spark://spark-master:7077",
+      ]
+    environment:
+      <<: *local-environment
+      SPARK_NO_DAEMONIZE: "true"
+      SPARK_WORKER_CORES: "4"
+      SPARK_WORKER_MEMORY: 6g
+      PYTHONPATH: /opt/app/src:/opt/spark/python/lib/pyspark.zip:/opt/spark/python/lib/py4j-0.10.9.7-src.zip
+    ports:
+      - "127.0.0.1:18089:8081"
+    depends_on:
+      spark-master:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python3",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8081', timeout=2)",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+    cpus: 4.0
+    mem_limit: 7g
+
+  checkpoint-volume-init:
+    <<: *spark-common
+    user: "0:0"
+    entrypoint: ["/bin/sh", "-ec"]
+    command: ["chown -R 185:185 /checkpoints && chmod 750 /checkpoints"]
+    restart: "no"
+    profiles: [jobs]
+
+  producer:
+    build:
+      context: .
+      dockerfile: docker/producer/Dockerfile
+    image: tiktok-se-intern-producer:local
+    environment:
+      REDPANDA_BOOTSTRAP_SERVERS: redpanda:9092
+      RATING_TOPIC: rating-events
+    volumes:
+      - ./data:/data:ro
+      - ./reports/runtime:/reports/runtime
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    profiles: [jobs]
+    networks: [platform]
+
+  streaming-job:
+    <<: *spark-common
+    command:
+      [
+        "/opt/spark/bin/spark-submit",
+        "--master",
+        "spark://spark-master:7077",
+        "--conf",
+        "spark.driver.host=streaming-job",
+        "--conf",
+        "spark.driver.bindAddress=0.0.0.0",
+        "--conf",
+        "spark.cores.max=2",
+        "--conf",
+        "spark.executor.cores=2",
+        "/opt/app/jobs/streaming_job.py",
+      ]
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      iceberg-rest:
+        condition: service_healthy
+      spark-worker:
+        condition: service_healthy
+      checkpoint-volume-init:
+        condition: service_completed_successfully
+    profiles: [jobs]
+    restart: on-failure:3
+    cpus: 1.5
+    mem_limit: 2g
+
+volumes:
+  redpanda_data:
+  iceberg_catalog:
+  minio_data:
+  spark_checkpoints:
+
+networks:
+  platform:
+    driver: bridge
