@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Install locked dependencies
+        run: python3 scripts/task.py setup
+      - name: Verify lock is hash-complete
+        run: .venv/bin/python -m pip install --dry-run --require-hashes -r requirements.lock
+      - name: Ruff
+        run: .venv/bin/python -m ruff check .
+      - name: Mypy
+        run: .venv/bin/python -m mypy src
+      - name: Unit tests and branch coverage
+        run: >-
+          .venv/bin/python -m pytest
+          -m "not spark and not integration and not e2e and not recovery and not benchmark"
+          --cov recommendation_features --cov-branch --cov-report=term-missing
+      - name: Spark transformation tests
+        run: .venv/bin/python -m pytest tests/spark -m spark -v
+      - name: Compose validation
+        run: docker compose config --quiet
+      - name: Secret and large-file scans
+        run: |
+          .venv/bin/python scripts/secret_scan.py
+          .venv/bin/python scripts/check_committed_files.py
