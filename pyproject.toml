@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tiktok-se-intern"
+version = "0.1.0"
+description = "Stream-Batch Recommendation Feature Platform"
+readme = "README.md"
+requires-python = "==3.11.*"
+license = {text = "Apache-2.0"}
+authors = [{name = "En Le"}]
+dependencies = [
+  "confluent-kafka==2.15.0",
+  "psutil==7.0.0",
+  "pyspark==3.5.8",
+  "PyYAML==6.0.2",
+  "structlog==25.4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy==1.16.1",
+  "pytest==8.4.1",
+  "pytest-cov==6.2.1",
+  "ruff==0.12.5",
+]
+
+[project.scripts]
+recommendation-producer = "recommendation_features.producer:main"
+recommendation-batch = "recommendation_features.batch_job:main"
+recommendation-parity = "recommendation_features.parity:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --strict-config"
+testpaths = ["tests"]
+markers = [
+  "spark: requires a local Java 17 compatible Spark runtime",
+  "integration: requires Docker services",
+  "e2e: complete local end-to-end verification",
+  "recovery: destructive streaming-container restart verification",
+  "benchmark: MovieLens 1M local benchmark",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["recommendation_features"]
+omit = [
+  "src/recommendation_features/streaming_job.py",
+  "src/recommendation_features/batch_job.py",
+  "src/recommendation_features/iceberg_tables.py",
+  "src/recommendation_features/parity.py",
+  "src/recommendation_features/platform_probe.py",
+]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+skip_covered = false
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+# The locked official Spark image uses Python 3.10, where datetime.UTC is unavailable.
+ignore = ["UP017"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["recommendation_features"]
+exclude = ["tests/"]
+warn_unused_configs = true

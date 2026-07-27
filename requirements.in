@@ -1,0 +1,10 @@
+confluent-kafka==2.15.0
+psutil==7.0.0
+pyspark==3.5.8
+PyYAML==6.0.2
+structlog==25.4.0
+mypy==1.16.1
+pytest==8.4.1
+pytest-cov==6.2.1
+ruff==0.12.5
+

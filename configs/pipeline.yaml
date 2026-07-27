@@ -1,0 +1,41 @@
+schema_version: 1
+topics:
+  ratings: rating-events
+  dlq: rating-events-dlq
+  partitions: 3
+  replication_factor: 1
+  retention_ms: 604800000
+streaming:
+  watermark: 24 hours
+  window_duration: 7 days
+  slide_duration: 1 day
+  trigger_interval: 10 seconds
+  checkpoint_root: /checkpoints
+  shuffle_partitions: 8
+  state_store: rocksdb
+features:
+  version: 1
+  average_tolerance: 1.0e-9
+producer:
+  bootstrap_servers: redpanda:9092
+  events_per_second: 100
+  batch_size: 100
+  max_records: 1000
+  duplicate_percentage: 0.0
+  out_of_order_percentage: 0.0
+  out_of_order_delay_seconds: 7200
+  random_seed: 169849
+catalog:
+  name: local
+  uri: http://iceberg-rest:8181
+  warehouse: s3://warehouse/
+  s3_endpoint: http://minio:9000
+  region: us-east-1
+datasets:
+  movielens_100k:
+    url: https://files.grouplens.org/datasets/movielens/ml-100k.zip
+    md5: 0e33842e24a9c977be4e0107933c0723
+  movielens_1m:
+    url: https://files.grouplens.org/datasets/movielens/ml-1m.zip
+    md5: c4d9eecfca2ab87c1945afe126590906
+
