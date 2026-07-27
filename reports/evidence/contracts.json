@@ -1,23 +1,23 @@
 {
   "after_table_counts": {
     "local.audit.parity_results": 2,
-    "local.audit.pipeline_runs": 2,
-    "local.features.movie_batch_features": 189880,
-    "local.features.movie_stream_features": 184605,
-    "local.features.user_batch_features": 14046,
-    "local.features.user_stream_features": 13770,
+    "local.audit.pipeline_runs": 1,
+    "local.features.movie_batch_features": 1095665,
+    "local.features.movie_stream_features": 1095665,
+    "local.features.user_batch_features": 126458,
+    "local.features.user_stream_features": 126458,
     "local.raw.invalid_rating_events": 2,
-    "local.raw.valid_rating_events": 100001
+    "local.raw.valid_rating_events": 1000211
   },
   "before_table_counts": {
     "local.audit.parity_results": 2,
-    "local.audit.pipeline_runs": 2,
-    "local.features.movie_batch_features": 189880,
-    "local.features.movie_stream_features": 184605,
-    "local.features.user_batch_features": 14046,
-    "local.features.user_stream_features": 13770,
+    "local.audit.pipeline_runs": 1,
+    "local.features.movie_batch_features": 1095665,
+    "local.features.movie_stream_features": 1095665,
+    "local.features.user_batch_features": 126458,
+    "local.features.user_stream_features": 126458,
     "local.raw.invalid_rating_events": 0,
-    "local.raw.valid_rating_events": 100000
+    "local.raw.valid_rating_events": 1000210
   },
   "catalog_contention_regression": {
     "checkpoint_retry_output_rows": 2,
@@ -30,11 +30,12 @@
     "invalid_rating_records": 1,
     "late_event_time_utc": "1990-01-01T00:00:00Z",
     "malformed_json_records": 1,
-    "published_records": 3
+    "published_records": 3,
+    "watermark_finalization_marker_records": 1
   },
   "dataset": {
-    "md5": "0e33842e24a9c977be4e0107933c0723",
-    "name": "MovieLens 100K plus three synthetic schema-contract records"
+    "md5": "c4d9eecfca2ab87c1945afe126590906",
+    "name": "MovieLens 1M plus one watermark-finalization marker and three synthetic schema-contract records"
   },
   "environment": "local Docker Desktop Linux containers",
   "limitations": [
@@ -63,38 +64,38 @@
     "duplicate_invalid_record_ids": 0,
     "late_event_query_progress": {
       "movie_feature_aggregation": {
-        "batch_id": 7,
+        "batch_id": 65,
         "event_time": {
           "avg": "1990-01-01T00:00:00.000Z",
           "max": "1990-01-01T00:00:00.000Z",
           "min": "1990-01-01T00:00:00.000Z",
-          "watermark": "1998-04-21T23:10:38.000Z"
+          "watermark": "2034-12-31T00:00:00.000Z"
         },
         "num_input_rows": 3,
         "num_rows_dropped_by_watermark": 1,
         "source_end_offset": {
           "rating-events": {
-            "0": 32809,
-            "1": 35650,
-            "2": 36544
+            "0": 344571,
+            "1": 343530,
+            "2": 329716
           }
         }
       },
       "user_feature_aggregation": {
-        "batch_id": 7,
+        "batch_id": 65,
         "event_time": {
           "avg": "1990-01-01T00:00:00.000Z",
           "max": "1990-01-01T00:00:00.000Z",
           "min": "1990-01-01T00:00:00.000Z",
-          "watermark": "1998-04-21T23:10:38.000Z"
+          "watermark": "2034-12-31T00:00:00.000Z"
         },
         "num_input_rows": 3,
         "num_rows_dropped_by_watermark": 1,
         "source_end_offset": {
           "rating-events": {
-            "0": 32809,
-            "1": 35650,
-            "2": 36544
+            "0": 344571,
+            "1": 343530,
+            "2": 329716
           }
         }
       }
@@ -105,7 +106,7 @@
     "unique_invalid_record_ids": 2,
     "user_feature_row_change": 0
   },
-  "recorded_at_utc": "2026-07-27T08:06:57.762840+00:00",
+  "recorded_at_utc": "2026-07-27T09:35:22.163638+00:00",
   "runs": 1,
   "status": "pass"
 }

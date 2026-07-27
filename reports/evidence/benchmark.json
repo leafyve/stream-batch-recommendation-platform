@@ -37,23 +37,23 @@
   "discovery": [
     {
       "acknowledged": 10000,
-      "actual_events_per_second": 500.00048747547004,
+      "actual_events_per_second": 500.03766573721475,
       "attempted": 10000,
       "backlog_at_last_producer_ack": {
-        "raw_invalid_ingestion": 7378
+        "raw_invalid_ingestion": 7244
       },
       "controlled_backlog": true,
       "injected_duplicates": 0,
-      "last_ack_to_all_queries_committed_seconds": 19.359000000054948,
-      "maximum_query_backlog_at_last_producer_ack": 7378,
+      "last_ack_to_all_queries_committed_seconds": 15.594000000040978,
+      "maximum_query_backlog_at_last_producer_ack": 7244,
       "phase": "discovery",
       "reordered_events": 0,
       "source_records": 10000,
       "spark": {
-        "input_rows_per_second_median": 302.1921737348904,
-        "micro_batch_duration_ms_p50": 12291.0,
-        "micro_batch_duration_ms_p95": 24750.2,
-        "processed_rows_per_second_median": 279.1032250329697,
+        "input_rows_per_second_median": 371.10655737704917,
+        "micro_batch_duration_ms_p50": 10680.0,
+        "micro_batch_duration_ms_p95": 19912.2,
+        "processed_rows_per_second_median": 324.6903576802871,
         "progress_records": 9
       },
       "start_record": 0,
@@ -62,26 +62,26 @@
     },
     {
       "acknowledged": 10000,
-      "actual_events_per_second": 1499.9910643282221,
+      "actual_events_per_second": 1499.9724194820358,
       "attempted": 10000,
       "backlog_at_last_producer_ack": {
-        "movie_feature_aggregation": 8841,
-        "raw_invalid_ingestion": 8841,
-        "raw_valid_ingestion": 8841,
-        "user_feature_aggregation": 8841
+        "movie_feature_aggregation": 10000,
+        "raw_invalid_ingestion": 3191,
+        "raw_valid_ingestion": 10000,
+        "user_feature_aggregation": 10000
       },
       "controlled_backlog": true,
       "injected_duplicates": 0,
-      "last_ack_to_all_queries_committed_seconds": 15.077999999979511,
-      "maximum_query_backlog_at_last_producer_ack": 8841,
+      "last_ack_to_all_queries_committed_seconds": 17.42099999997299,
+      "maximum_query_backlog_at_last_producer_ack": 10000,
       "phase": "discovery",
       "reordered_events": 0,
       "source_records": 10000,
       "spark": {
-        "input_rows_per_second_median": 534.4153034863951,
-        "micro_batch_duration_ms_p50": 3869.5,
-        "micro_batch_duration_ms_p95": 8726.649999999998,
-        "processed_rows_per_second_median": 871.1237253078099,
+        "input_rows_per_second_median": 500.0,
+        "micro_batch_duration_ms_p50": 4315.5,
+        "micro_batch_duration_ms_p95": 8124.049999999997,
+        "processed_rows_per_second_median": 1306.3109518159317,
         "progress_records": 10
       },
       "start_record": 10000,
@@ -90,7 +90,7 @@
     },
     {
       "acknowledged": 10000,
-      "actual_events_per_second": 2999.7702676937765,
+      "actual_events_per_second": 2999.958916761903,
       "attempted": 10000,
       "backlog_at_last_producer_ack": {
         "movie_feature_aggregation": 10000,
@@ -100,16 +100,16 @@
       },
       "controlled_backlog": true,
       "injected_duplicates": 0,
-      "last_ack_to_all_queries_committed_seconds": 9.047000000020489,
+      "last_ack_to_all_queries_committed_seconds": 10.875,
       "maximum_query_backlog_at_last_producer_ack": 10000,
       "phase": "discovery",
       "reordered_events": 0,
       "source_records": 10000,
       "spark": {
-        "input_rows_per_second_median": 1000.0000100000002,
-        "micro_batch_duration_ms_p50": 3729.5,
-        "micro_batch_duration_ms_p95": 7873.5,
-        "processed_rows_per_second_median": 1915.611129657904,
+        "input_rows_per_second_median": 999.9500049995002,
+        "micro_batch_duration_ms_p50": 3953.5,
+        "micro_batch_duration_ms_p95": 8083.5,
+        "processed_rows_per_second_median": 1811.72065022082,
         "progress_records": 6
       },
       "start_record": 20000,
@@ -120,31 +120,32 @@
   "environment": "local Docker Desktop Linux containers",
   "full_dataset_remainder": {
     "acknowledged": 897813,
-    "actual_events_per_second": 2999.993122353043,
+    "actual_events_per_second": 2999.9965021141984,
     "attempted": 897813,
     "backlog_at_last_producer_ack": {
-      "movie_feature_aggregation": 50507,
-      "raw_invalid_ingestion": 78781,
-      "raw_valid_ingestion": 83523,
-      "user_feature_aggregation": 68896
+      "movie_feature_aggregation": 27273,
+      "raw_invalid_ingestion": 27273,
+      "raw_valid_ingestion": 27273,
+      "user_feature_aggregation": 57274
     },
     "injected_duplicates": 17604,
-    "last_ack_to_all_queries_committed_seconds": 32.14099999994505,
-    "maximum_query_backlog_at_last_producer_ack": 83523,
+    "last_ack_to_all_queries_committed_seconds": 19.31299999996554,
+    "maximum_query_backlog_at_last_producer_ack": 57274,
     "phase": "full-dataset-remainder",
     "reordered_events": 44010,
     "source_records": 880209,
     "spark": {
       "input_rows_per_second_median": 3000.0,
-      "micro_batch_duration_ms_p50": 7510.5,
-      "micro_batch_duration_ms_p95": 16188.65,
-      "processed_rows_per_second_median": 3543.7139881622124,
-      "progress_records": 118
+      "micro_batch_duration_ms_p50": 5657.0,
+      "micro_batch_duration_ms_p95": 10370.899999999998,
+      "processed_rows_per_second_median": 5165.782063603983,
+      "progress_records": 122
     },
     "start_record": 120000,
     "target_events_per_second": 3000.0,
     "trial": 1
   },
+  "git_revision": "6e839135dfe4b2cf7b936925f927460f42e411f1",
   "limitations": [
     "This is a single-machine local Docker benchmark, not a cluster capacity claim.",
     "Last-ack-to-commit latency measures the last producer acknowledgement until all four Spark queries commit the corresponding high-watermarks.",
@@ -152,33 +153,33 @@
   ],
   "measured_summary": {
     "high": {
-      "last_ack_to_commit_seconds_p50": 10.936999999918044,
-      "micro_batch_duration_ms_p50": 3169.0,
-      "micro_batch_duration_ms_p95": 7230.25,
-      "producer_actual_events_per_second_p50": 3000.0203980381175,
+      "last_ack_to_commit_seconds_p50": 12.89000000001397,
+      "micro_batch_duration_ms_p50": 3271.0,
+      "micro_batch_duration_ms_p95": 7387.25,
+      "producer_actual_events_per_second_p50": 2999.933071493218,
       "runs": 3,
       "spark_input_rows_per_second_p50": 1000.0,
-      "spark_processed_rows_per_second_p50": 2153.0574756648875,
+      "spark_processed_rows_per_second_p50": 2094.3925931620925,
       "target_events_per_second": 3000.0
     },
     "low": {
-      "last_ack_to_commit_seconds_p50": 12.937000000034459,
-      "micro_batch_duration_ms_p50": 3002.5,
-      "micro_batch_duration_ms_p95": 7640.699999999997,
-      "producer_actual_events_per_second_p50": 750.0365046704054,
+      "last_ack_to_commit_seconds_p50": 10.827999999979511,
+      "micro_batch_duration_ms_p50": 2782.0,
+      "micro_batch_duration_ms_p95": 7777.749999999997,
+      "producer_actual_events_per_second_p50": 750.0472338683546,
       "runs": 3,
-      "spark_input_rows_per_second_p50": 499.97557499975574,
-      "spark_processed_rows_per_second_p50": 1327.1440701304782,
+      "spark_input_rows_per_second_p50": 499.98213499982137,
+      "spark_processed_rows_per_second_p50": 1470.3031948592634,
       "target_events_per_second": 750.0
     },
     "medium": {
-      "last_ack_to_commit_seconds_p50": 17.14000000001397,
-      "micro_batch_duration_ms_p50": 2654.5,
-      "micro_batch_duration_ms_p95": 7031.999999999998,
-      "producer_actual_events_per_second_p50": 1500.0228559983634,
+      "last_ack_to_commit_seconds_p50": 18.030999999959022,
+      "micro_batch_duration_ms_p50": 2589.0,
+      "micro_batch_duration_ms_p95": 5768.899999999999,
+      "producer_actual_events_per_second_p50": 1500.0390058144678,
       "runs": 3,
-      "spark_input_rows_per_second_p50": 499.98943499989434,
-      "spark_processed_rows_per_second_p50": 1736.4415179835742,
+      "spark_input_rows_per_second_p50": 499.9631449996315,
+      "spark_processed_rows_per_second_p50": 1293.0846562637512,
       "target_events_per_second": 1500.0
     }
   },
@@ -186,7 +187,7 @@
     "high": [
       {
         "acknowledged": 10000,
-        "actual_events_per_second": 3000.043271124767,
+        "actual_events_per_second": 2999.6895936203873,
         "attempted": 10000,
         "backlog_at_last_producer_ack": {
           "movie_feature_aggregation": 10000,
@@ -195,16 +196,16 @@
           "user_feature_aggregation": 10000
         },
         "injected_duplicates": 0,
-        "last_ack_to_all_queries_committed_seconds": 10.890999999945052,
+        "last_ack_to_all_queries_committed_seconds": 12.89000000001397,
         "maximum_query_backlog_at_last_producer_ack": 10000,
         "phase": "high",
         "reordered_events": 0,
         "source_records": 10000,
         "spark": {
           "input_rows_per_second_median": 1000.0,
-          "micro_batch_duration_ms_p50": 2969.5,
-          "micro_batch_duration_ms_p95": 6997.25,
-          "processed_rows_per_second_median": 2221.0344637713633,
+          "micro_batch_duration_ms_p50": 3242.5,
+          "micro_batch_duration_ms_p95": 7093.25,
+          "processed_rows_per_second_median": 2132.405694177611,
           "progress_records": 6
         },
         "start_record": 90000,
@@ -213,7 +214,7 @@
       },
       {
         "acknowledged": 10000,
-        "actual_events_per_second": 3000.0022584001904,
+        "actual_events_per_second": 3000.03535181789,
         "attempted": 10000,
         "backlog_at_last_producer_ack": {
           "movie_feature_aggregation": 10000,
@@ -222,16 +223,16 @@
           "user_feature_aggregation": 10000
         },
         "injected_duplicates": 0,
-        "last_ack_to_all_queries_committed_seconds": 13.015999999945052,
+        "last_ack_to_all_queries_committed_seconds": 14.25,
         "maximum_query_backlog_at_last_producer_ack": 10000,
         "phase": "high",
         "reordered_events": 0,
         "source_records": 10000,
         "spark": {
-          "input_rows_per_second_median": 1000.0,
-          "micro_batch_duration_ms_p50": 3291.0,
-          "micro_batch_duration_ms_p95": 7403.5,
-          "processed_rows_per_second_median": 2082.8339939440816,
+          "input_rows_per_second_median": 1000.0500050005,
+          "micro_batch_duration_ms_p50": 3271.0,
+          "micro_batch_duration_ms_p95": 7387.25,
+          "processed_rows_per_second_median": 2094.3925931620925,
           "progress_records": 6
         },
         "start_record": 100000,
@@ -240,7 +241,7 @@
       },
       {
         "acknowledged": 10000,
-        "actual_events_per_second": 3000.0203980381175,
+        "actual_events_per_second": 2999.933071493218,
         "attempted": 10000,
         "backlog_at_last_producer_ack": {
           "movie_feature_aggregation": 10000,
@@ -249,16 +250,16 @@
           "user_feature_aggregation": 10000
         },
         "injected_duplicates": 0,
-        "last_ack_to_all_queries_committed_seconds": 10.936999999918044,
+        "last_ack_to_all_queries_committed_seconds": 10.843999999924563,
         "maximum_query_backlog_at_last_producer_ack": 10000,
         "phase": "high",
         "reordered_events": 0,
         "source_records": 10000,
         "spark": {
           "input_rows_per_second_median": 1000.0,
-          "micro_batch_duration_ms_p50": 3169.0,
-          "micro_batch_duration_ms_p95": 7230.25,
-          "processed_rows_per_second_median": 2153.0574756648875,
+          "micro_batch_duration_ms_p50": 3399.5,
+          "micro_batch_duration_ms_p95": 7574.25,
+          "processed_rows_per_second_median": 2014.5640926952328,
           "progress_records": 6
         },
         "start_record": 110000,
@@ -269,25 +270,25 @@
     "low": [
       {
         "acknowledged": 10000,
-        "actual_events_per_second": 750.0467651345557,
+        "actual_events_per_second": 750.0457288817806,
         "attempted": 10000,
         "backlog_at_last_producer_ack": {
-          "movie_feature_aggregation": 5792,
-          "raw_invalid_ingestion": 5792,
-          "raw_valid_ingestion": 5792,
-          "user_feature_aggregation": 5792
+          "movie_feature_aggregation": 5503,
+          "raw_invalid_ingestion": 5503,
+          "raw_valid_ingestion": 5503,
+          "user_feature_aggregation": 5503
         },
         "injected_duplicates": 0,
-        "last_ack_to_all_queries_committed_seconds": 12.937000000034459,
-        "maximum_query_backlog_at_last_producer_ack": 5792,
+        "last_ack_to_all_queries_committed_seconds": 12.952999999979511,
+        "maximum_query_backlog_at_last_producer_ack": 5503,
         "phase": "low",
         "reordered_events": 0,
         "source_records": 10000,
         "spark": {
-          "input_rows_per_second_median": 499.99208499992085,
-          "micro_batch_duration_ms_p50": 3268.0,
-          "micro_batch_duration_ms_p95": 8130.849999999998,
-          "processed_rows_per_second_median": 1327.1440701304782,
+          "input_rows_per_second_median": 500.0,
+          "micro_batch_duration_ms_p50": 2782.0,
+          "micro_batch_duration_ms_p95": 7989.399999999997,
+          "processed_rows_per_second_median": 1488.7837695281933,
           "progress_records": 10
         },
         "start_record": 30000,
@@ -296,25 +297,25 @@
       },
       {
         "acknowledged": 10000,
-        "actual_events_per_second": 750.0365046704054,
+        "actual_events_per_second": 750.0472338683546,
         "attempted": 10000,
         "backlog_at_last_producer_ack": {
-          "movie_feature_aggregation": 7443,
-          "raw_invalid_ingestion": 7443,
-          "raw_valid_ingestion": 7443,
-          "user_feature_aggregation": 7443
+          "movie_feature_aggregation": 6787,
+          "raw_invalid_ingestion": 6787,
+          "raw_valid_ingestion": 6787,
+          "user_feature_aggregation": 6787
         },
         "injected_duplicates": 0,
-        "last_ack_to_all_queries_committed_seconds": 8.844000000040978,
-        "maximum_query_backlog_at_last_producer_ack": 7443,
+        "last_ack_to_all_queries_committed_seconds": 10.827999999979511,
+        "maximum_query_backlog_at_last_producer_ack": 6787,
         "phase": "low",
         "reordered_events": 0,
         "source_records": 10000,
         "spark": {
-          "input_rows_per_second_median": 499.97557499975574,
-          "micro_batch_duration_ms_p50": 3002.5,
-          "micro_batch_duration_ms_p95": 7640.699999999997,
-          "processed_rows_per_second_median": 1179.244794438226,
+          "input_rows_per_second_median": 499.98213499982137,
+          "micro_batch_duration_ms_p50": 2878.0,
+          "micro_batch_duration_ms_p95": 7777.749999999997,
+          "processed_rows_per_second_median": 1445.62976584115,
           "progress_records": 10
         },
         "start_record": 40000,
@@ -323,25 +324,25 @@
       },
       {
         "acknowledged": 10000,
-        "actual_events_per_second": 750.026574866602,
+        "actual_events_per_second": 750.0572138955775,
         "attempted": 10000,
         "backlog_at_last_producer_ack": {
-          "movie_feature_aggregation": 5718,
-          "raw_invalid_ingestion": 5718,
-          "raw_valid_ingestion": 5718,
-          "user_feature_aggregation": 5718
+          "movie_feature_aggregation": 6164,
+          "raw_invalid_ingestion": 6164,
+          "raw_valid_ingestion": 6164,
+          "user_feature_aggregation": 6164
         },
         "injected_duplicates": 0,
-        "last_ack_to_all_queries_committed_seconds": 13.155999999959022,
-        "maximum_query_backlog_at_last_producer_ack": 5718,
+        "last_ack_to_all_queries_committed_seconds": 9.64000000001397,
+        "maximum_query_backlog_at_last_producer_ack": 6164,
         "phase": "low",
         "reordered_events": 0,
         "source_records": 10000,
         "spark": {
-          "input_rows_per_second_median": 499.9714128587142,
-          "micro_batch_duration_ms_p50": 2960.5,
-          "micro_batch_duration_ms_p95": 7608.749999999997,
-          "processed_rows_per_second_median": 1383.2047104600701,
+          "input_rows_per_second_median": 499.9691830816919,
+          "micro_batch_duration_ms_p50": 2707.0,
+          "micro_batch_duration_ms_p95": 7422.099999999998,
+          "processed_rows_per_second_median": 1470.3031948592634,
           "progress_records": 10
         },
         "start_record": 50000,
@@ -352,25 +353,25 @@
     "medium": [
       {
         "acknowledged": 10000,
-        "actual_events_per_second": 1500.0291494665073,
+        "actual_events_per_second": 1500.069969188516,
         "attempted": 10000,
         "backlog_at_last_producer_ack": {
-          "movie_feature_aggregation": 3943,
-          "raw_invalid_ingestion": 3943,
-          "raw_valid_ingestion": 3943,
+          "movie_feature_aggregation": 10000,
+          "raw_invalid_ingestion": 1314,
+          "raw_valid_ingestion": 10000,
           "user_feature_aggregation": 10000
         },
         "injected_duplicates": 0,
-        "last_ack_to_all_queries_committed_seconds": 17.063000000081956,
+        "last_ack_to_all_queries_committed_seconds": 18.32799999997951,
         "maximum_query_backlog_at_last_producer_ack": 10000,
         "phase": "medium",
         "reordered_events": 0,
         "source_records": 10000,
         "spark": {
-          "input_rows_per_second_median": 499.98943499989434,
-          "micro_batch_duration_ms_p50": 2325.0,
-          "micro_batch_duration_ms_p95": 7031.999999999998,
-          "processed_rows_per_second_median": 1850.2445273235862,
+          "input_rows_per_second_median": 499.9631449996315,
+          "micro_batch_duration_ms_p50": 2576.5,
+          "micro_batch_duration_ms_p95": 6555.049999999997,
+          "processed_rows_per_second_median": 1602.6529544429409,
           "progress_records": 10
         },
         "start_record": 60000,
@@ -379,25 +380,25 @@
       },
       {
         "acknowledged": 10000,
-        "actual_events_per_second": 1499.3697675814958,
+        "actual_events_per_second": 1500.0256242625135,
         "attempted": 10000,
         "backlog_at_last_producer_ack": {
           "movie_feature_aggregation": 10000,
-          "raw_invalid_ingestion": 10000,
-          "raw_valid_ingestion": 2447,
+          "raw_invalid_ingestion": 1120,
+          "raw_valid_ingestion": 10000,
           "user_feature_aggregation": 10000
         },
         "injected_duplicates": 0,
-        "last_ack_to_all_queries_committed_seconds": 17.14000000001397,
+        "last_ack_to_all_queries_committed_seconds": 18.030999999959022,
         "maximum_query_backlog_at_last_producer_ack": 10000,
         "phase": "medium",
         "reordered_events": 0,
         "source_records": 10000,
         "spark": {
-          "input_rows_per_second_median": 500.0,
-          "micro_batch_duration_ms_p50": 2654.5,
-          "micro_batch_duration_ms_p95": 7403.149999999998,
-          "processed_rows_per_second_median": 1736.4415179835742,
+          "input_rows_per_second_median": 499.96120499961205,
+          "micro_batch_duration_ms_p50": 2589.0,
+          "micro_batch_duration_ms_p95": 5566.899999999999,
+          "processed_rows_per_second_median": 1293.0846562637512,
           "progress_records": 10
         },
         "start_record": 70000,
@@ -406,25 +407,25 @@
       },
       {
         "acknowledged": 10000,
-        "actual_events_per_second": 1500.0228559983634,
+        "actual_events_per_second": 1500.0390058144678,
         "attempted": 10000,
         "backlog_at_last_producer_ack": {
           "movie_feature_aggregation": 10000,
           "raw_invalid_ingestion": 10000,
-          "raw_valid_ingestion": 10000,
+          "raw_valid_ingestion": 2005,
           "user_feature_aggregation": 10000
         },
         "injected_duplicates": 0,
-        "last_ack_to_all_queries_committed_seconds": 17.265999999945052,
+        "last_ack_to_all_queries_committed_seconds": 14.968999999924563,
         "maximum_query_backlog_at_last_producer_ack": 10000,
         "phase": "medium",
         "reordered_events": 0,
         "source_records": 10000,
         "spark": {
-          "input_rows_per_second_median": 499.96620499966207,
-          "micro_batch_duration_ms_p50": 2836.0,
-          "micro_batch_duration_ms_p95": 6083.499999999999,
-          "processed_rows_per_second_median": 1471.426468625275,
+          "input_rows_per_second_median": 499.97005499970055,
+          "micro_batch_duration_ms_p50": 2630.0,
+          "micro_batch_duration_ms_p95": 5768.899999999999,
+          "processed_rows_per_second_median": 1232.6047898771758,
           "progress_records": 10
         },
         "start_record": 80000,
@@ -441,50 +442,50 @@
       {
         "entity_type": "user",
         "exact_value_mismatches": 0,
-        "expected_rows": 126292,
+        "expected_rows": 105318,
         "floating_point_mismatches": 0,
         "missing_streaming_keys": 0,
         "parity_percentage": 100.0,
         "status": "pass",
-        "streaming_rows": 126292,
+        "streaming_rows": 105318,
         "unexpected_streaming_keys": 0,
-        "watermark": "2003-02-27 00:00:00"
+        "watermark": "2002-01-06 00:00:00"
       },
       {
         "entity_type": "movie",
         "exact_value_mismatches": 0,
-        "expected_rows": 1074950,
+        "expected_rows": 931842,
         "floating_point_mismatches": 0,
         "missing_streaming_keys": 0,
         "parity_percentage": 100.0,
         "status": "pass",
-        "streaming_rows": 1074950,
+        "streaming_rows": 931842,
         "unexpected_streaming_keys": 0,
-        "watermark": "2003-01-03 00:00:00"
+        "watermark": "2002-01-06 00:00:00"
       }
     ],
-    "process_restart_recovery_seconds_from_100k_correctness_run": 12.561999999918044,
+    "process_restart_recovery_seconds_from_100k_correctness_run": 12.640999999945052,
     "producer_attempted_messages": 1017813,
     "reordered_events": 44010,
     "table_counts": {
       "local.audit.parity_results": 2,
       "local.audit.pipeline_runs": 1,
       "local.features.movie_batch_features": 1095665,
-      "local.features.movie_stream_features": 1074950,
+      "local.features.movie_stream_features": 931842,
       "local.features.user_batch_features": 126458,
-      "local.features.user_stream_features": 126292,
+      "local.features.user_stream_features": 105318,
       "local.raw.invalid_rating_events": 0,
       "local.raw.valid_rating_events": 1000209
     }
   },
   "overall_spark": {
-    "input_rows_per_second_median": 2999.2,
-    "micro_batch_duration_ms_p50": 5135.5,
-    "micro_batch_duration_ms_p95": 15802.099999999999,
-    "processed_rows_per_second_median": 2868.2945344129553,
-    "progress_records": 222
+    "input_rows_per_second_median": 2999.4,
+    "micro_batch_duration_ms_p50": 4131.0,
+    "micro_batch_duration_ms_p95": 10346.599999999997,
+    "processed_rows_per_second_median": 3503.1527323680525,
+    "progress_records": 225
   },
-  "recorded_at_utc": "2026-07-27T08:37:31.970443+00:00",
+  "recorded_at_utc": "2026-07-27T09:33:18.488346+00:00",
   "resources": {
     "container_limits": {
       "iceberg-rest": {
@@ -510,34 +511,34 @@
     },
     "container_snapshot": [
       {
-        "cpu": "0.10%",
-        "memory": "242.2MiB / 768MiB",
+        "cpu": "0.13%",
+        "memory": "235.9MiB / 768MiB",
         "name": "tiktok-se-intern-iceberg-rest-1"
       },
       {
-        "cpu": "0.08%",
-        "memory": "340.2MiB / 7GiB",
+        "cpu": "0.17%",
+        "memory": "340.6MiB / 7GiB",
         "name": "tiktok-se-intern-spark-worker-1"
       },
       {
-        "cpu": "1.75%",
-        "memory": "44.4MiB / 256MiB",
+        "cpu": "0.00%",
+        "memory": "24.88MiB / 256MiB",
         "name": "tiktok-se-intern-console-1"
       },
       {
-        "cpu": "5.97%",
-        "memory": "285MiB / 768MiB",
+        "cpu": "0.73%",
+        "memory": "283.1MiB / 768MiB",
         "name": "tiktok-se-intern-spark-master-1"
       },
       {
-        "cpu": "0.28%",
-        "memory": "520.6MiB / 1.5GiB",
-        "name": "tiktok-se-intern-redpanda-1"
+        "cpu": "13.55%",
+        "memory": "462.5MiB / 1GiB",
+        "name": "tiktok-se-intern-minio-1"
       },
       {
-        "cpu": "0.03%",
-        "memory": "463.3MiB / 1GiB",
-        "name": "tiktok-se-intern-minio-1"
+        "cpu": "0.40%",
+        "memory": "518.9MiB / 1.5GiB",
+        "name": "tiktok-se-intern-redpanda-1"
       }
     ],
     "docker_cpus": 8,
@@ -551,6 +552,6 @@
     "full_dataset": 1,
     "measured_per_rate": 3
   },
-  "started_at_utc": "2026-07-27T08:23:01.473261+00:00",
+  "started_at_utc": "2026-07-27T09:19:27.663287+00:00",
   "status": "pass"
 }

@@ -1,0 +1,209 @@
+{
+  "clone_git_status_after_generated_evidence": [
+    " M README.md",
+    " M reports/evidence/benchmark.json",
+    " M reports/evidence/build.json",
+    " M reports/evidence/catalog.json",
+    " M reports/evidence/contracts.json",
+    " M reports/evidence/recovery.json"
+  ],
+  "command": "py -3.11 scripts/clean_clone_verify.py",
+  "commands": [
+    {
+      "command": "git clone --no-local \"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\" C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern",
+      "elapsed_seconds": 0.2339999999385327,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py setup",
+      "elapsed_seconds": 77.375,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py download-data --profile ml-100k",
+      "elapsed_seconds": 3.35999999998603,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py download-data --profile ml-1m",
+      "elapsed_seconds": 2.875,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "docker compose config --quiet",
+      "elapsed_seconds": 0.15600000007543713,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py --help",
+      "elapsed_seconds": 0.06199999991804361,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py test",
+      "elapsed_seconds": 19.17200000002049,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py spark-test",
+      "elapsed_seconds": 16.905999999959022,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py clean --volumes --confirm DELETE_PERSISTENT_DATA",
+      "elapsed_seconds": 2.047000000020489,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py recovery-test",
+      "elapsed_seconds": 317.28100000007544,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py clean --volumes --confirm DELETE_PERSISTENT_DATA",
+      "elapsed_seconds": 1.952999999979511,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py benchmark",
+      "elapsed_seconds": 830.9220000000205,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py run-stream",
+      "elapsed_seconds": 2.125,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern\\.venv\\Scripts\\python.exe scripts/inject_contract_events.py --advance-watermark-only",
+      "elapsed_seconds": 5.25,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern\\.venv\\Scripts\\python.exe scripts/wait_for_stream.py",
+      "elapsed_seconds": 40.686999999918044,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py probe --output contract-probe-before.json",
+      "elapsed_seconds": 31.40700000000652,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern\\.venv\\Scripts\\python.exe scripts/inject_contract_events.py",
+      "elapsed_seconds": 0.6400000000139698,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern\\.venv\\Scripts\\python.exe scripts/wait_for_stream.py",
+      "elapsed_seconds": 11.140999999945052,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "docker compose --profile jobs stop -t 60 streaming-job",
+      "elapsed_seconds": 0.7959999999729916,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py probe --output contract-probe-after.json",
+      "elapsed_seconds": 31.28200000000652,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern\\.venv\\Scripts\\python.exe scripts/capture_contract_evidence.py",
+      "elapsed_seconds": 0.31200000003445894,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern\\.venv\\Scripts\\python.exe scripts/capture_catalog_evidence.py",
+      "elapsed_seconds": 51.48499999998603,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern\\.venv\\Scripts\\python.exe scripts/capture_build_evidence.py",
+      "elapsed_seconds": 1.2190000000409782,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py integration-test",
+      "elapsed_seconds": 29.265999999945052,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "\"C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern\\.venv\\Scripts\\python.exe\" scripts/task.py report",
+      "elapsed_seconds": 0.1720000000204891,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern\\.venv\\Scripts\\python.exe scripts/secret_scan.py",
+      "elapsed_seconds": 0.4530000000959262,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern\\.venv\\Scripts\\python.exe scripts/check_committed_files.py",
+      "elapsed_seconds": 0.10899999993853271,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "docker compose --profile jobs down --remove-orphans",
+      "elapsed_seconds": 1.672000000020489,
+      "exit_code": 0,
+      "status": "pass"
+    },
+    {
+      "command": "git status --short",
+      "elapsed_seconds": 0.0470000000204891,
+      "exit_code": 0,
+      "status": "pass"
+    }
+  ],
+  "environment": "fresh local clone; Docker Desktop Linux containers",
+  "error": null,
+  "limitations": [
+    "Docker image layer cache may be reused, but containers and named volumes are fresh.",
+    "The temporary verification clone is retained for inspection."
+  ],
+  "quality_results": {
+    "branch_coverage_percent": 88.69395711500975,
+    "integration_and_e2e_failures": 0,
+    "integration_and_e2e_tests": 6,
+    "spark_failures": 0,
+    "spark_tests": 3,
+    "unit_failures": 0,
+    "unit_tests": 38
+  },
+  "recorded_at_utc": "2026-07-27T09:36:46.742391+00:00",
+  "runs": 1,
+  "source_commit": "6e839135dfe4b2cf7b936925f927460f42e411f1",
+  "source_repository": "C:\\Users\\En Le\\Downloads\\ai-models\\tiktok_SE_intern",
+  "started_at_utc": "2026-07-27T09:12:05.994510+00:00",
+  "status": "pass",
+  "verification_clone": "C:\\Users\\ENLE~1\\AppData\\Local\\Temp\\stream-batch-clean-clone-r2rs159y\\tiktok_SE_intern"
+}

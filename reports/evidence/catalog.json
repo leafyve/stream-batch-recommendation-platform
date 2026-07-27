@@ -7,8 +7,8 @@
     "volume": "iceberg_catalog:/catalog",
     "warehouse": "s3://warehouse/"
   },
-  "container_id_after_restart": "a40e8f86f4cae7ece852c74979cb97108802e7eba8083e9854a8b1c0ce022b6a",
-  "container_id_before_restart": "a40e8f86f4cae7ece852c74979cb97108802e7eba8083e9854a8b1c0ce022b6a",
+  "container_id_after_restart": "0c9638e8f9187fa0bb656e001f60ec073871ea731aeb89fe07938d73ab43cbdf",
+  "container_id_before_restart": "0c9638e8f9187fa0bb656e001f60ec073871ea731aeb89fe07938d73ab43cbdf",
   "environment": "local Docker Desktop Linux containers",
   "first_probe": "catalog-first",
   "limitations": [
@@ -16,7 +16,7 @@
     "The contract test does not emulate catalog host or disk loss."
   ],
   "probe_read_after_restart": "catalog-first",
-  "recorded_at_utc": "2026-07-27T08:40:08.144608+00:00",
+  "recorded_at_utc": "2026-07-27T09:36:13.655571+00:00",
   "repeated_commit_probe": "catalog-repeated",
   "runs": 3,
   "sqlite_driver_classpath_evidence": "/usr/lib/iceberg-rest/iceberg-rest-adapter.jar: org/sqlite/JDBC.class",

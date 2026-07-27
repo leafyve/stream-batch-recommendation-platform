@@ -1,13 +1,13 @@
 {
   "command": "py -3.11 scripts/capture_build_evidence.py",
   "compose_service_image_ids": {
-    "minio": "sha256:941ef2d5ad293539f8a4e3f3fa6327a2d760070ee8056ae6790d05c381267ac1",
-    "spark-master": "sha256:fe0b93b9ec12e834cb6997f8e4c9bb1e71498389733cd5cba6d480156895e8b8",
-    "spark-worker": "sha256:fe0b93b9ec12e834cb6997f8e4c9bb1e71498389733cd5cba6d480156895e8b8",
-    "streaming-job": "sha256:0c30e11d2d0fa2264826fe8babbe831d039f88b2f326818c6402765a438053a7"
+    "minio": "sha256:115ada7cef1a5f9fc2604042d8fe0dd3e0492fbab4d96fcbb8b3add1fede8a14",
+    "spark-master": "sha256:44b40128784bba459957e187f79b892e34db7877288b2fcf797350452ac3dd2e",
+    "spark-worker": "sha256:44b40128784bba459957e187f79b892e34db7877288b2fcf797350452ac3dd2e",
+    "streaming-job": "sha256:44b40128784bba459957e187f79b892e34db7877288b2fcf797350452ac3dd2e"
   },
   "environment": "local Docker Desktop Linux containers",
-  "git_revision": "c89eb148d019dbec10d667ef93e7c72f195b384a",
+  "git_revision": "6e839135dfe4b2cf7b936925f927460f42e411f1",
   "limitations": [
     "Local image IDs are host-local content identities, not invented registry digests.",
     "A rebuild can change metadata and therefore the local image ID."
@@ -21,9 +21,9 @@
       },
       "build_command": "docker compose build minio",
       "image": "tiktok-se-intern-minio:RELEASE.2025-10-15T17-29-55Z",
-      "local_image_id": "sha256:941ef2d5ad293539f8a4e3f3fa6327a2d760070ee8056ae6790d05c381267ac1",
+      "local_image_id": "sha256:115ada7cef1a5f9fc2604042d8fe0dd3e0492fbab4d96fcbb8b3add1fede8a14",
       "repo_digests": [
-        "tiktok-se-intern-minio@sha256:941ef2d5ad293539f8a4e3f3fa6327a2d760070ee8056ae6790d05c381267ac1"
+        "tiktok-se-intern-minio@sha256:115ada7cef1a5f9fc2604042d8fe0dd3e0492fbab4d96fcbb8b3add1fede8a14"
       ],
       "runtime_base_digest": "python:3.11.9-slim-bookworm@sha256:8fb099199b9f2d70342674bd9dbccd3ed03a258f26bbd1d556822c6dfc60c317",
       "source_commit": "9e49d5e7a648f00e26f2246f4dc28e6b07f8c84a",
@@ -34,9 +34,9 @@
       "build_arguments": {},
       "build_command": "docker compose --profile jobs build producer",
       "image": "tiktok-se-intern-producer:local",
-      "local_image_id": "sha256:520d91ae80e5664e8d66ad31a86a70076e11d9f9e80f62e274c144ec8780a33c",
+      "local_image_id": "sha256:b9e5a058486ded093954e62ef22d04815e9ed9d6a0ee51e2a1b1782646bc1fab",
       "repo_digests": [
-        "tiktok-se-intern-producer@sha256:520d91ae80e5664e8d66ad31a86a70076e11d9f9e80f62e274c144ec8780a33c"
+        "tiktok-se-intern-producer@sha256:b9e5a058486ded093954e62ef22d04815e9ed9d6a0ee51e2a1b1782646bc1fab"
       ],
       "source_commit": null,
       "source_release": "repository source"
@@ -46,15 +46,15 @@
       "build_arguments": {},
       "build_command": "docker compose build spark-master",
       "image": "tiktok-se-intern-spark:local",
-      "local_image_id": "sha256:fe0b93b9ec12e834cb6997f8e4c9bb1e71498389733cd5cba6d480156895e8b8",
+      "local_image_id": "sha256:44b40128784bba459957e187f79b892e34db7877288b2fcf797350452ac3dd2e",
       "repo_digests": [
-        "tiktok-se-intern-spark@sha256:fe0b93b9ec12e834cb6997f8e4c9bb1e71498389733cd5cba6d480156895e8b8"
+        "tiktok-se-intern-spark@sha256:44b40128784bba459957e187f79b892e34db7877288b2fcf797350452ac3dd2e"
       ],
       "source_commit": null,
       "source_release": "Spark image 3.5.8-scala2.12-java17-python3-ubuntu"
     }
   },
-  "recorded_at_utc": "2026-07-27T08:40:27.830523+00:00",
+  "recorded_at_utc": "2026-07-27T09:36:14.876562+00:00",
   "registry_images": {
     "console": "redpandadata/console:v3.8.0@sha256:4aa45603b7b9c57b7b8073289be4f880edb929599a8d3e17260e98d7ee7bcdd7",
     "iceberg_rest_fixture": "apache/iceberg-rest-fixture:1.10.1@sha256:f7d679d30ac9c640bdeb2c015dff533cd3c8f1c7d491ebcb5d436f9a42db1d6f",

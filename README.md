@@ -187,13 +187,13 @@ out-of-order delivery.
 |---|---:|
 | MovieLens 1M source rows | 1,000,209 |
 | Highest sustainable producer target | 3,000 events/s |
-| High-rate producer actual p50, 3 trials | 3,000.0 events/s |
-| High-rate Spark processed-rate p50 | 2,153.1 rows/s |
-| High-rate micro-batch duration p50 / p95 | 3,169 / 7,230 ms |
+| High-rate producer actual p50, 3 trials | 2,999.9 events/s |
+| High-rate Spark processed-rate p50 | 2,094.4 rows/s |
+| High-rate micro-batch duration p50 / p95 | 3,271 / 7,387 ms |
 | Injected duplicate messages / deduplicated valid rows | 17,604 / 1,000,209 |
 | Reordered events | 44,010 |
 | User / movie finalised-window parity | 100.0% / 100.0% |
-| Streaming-process restart recovery | 12.562 s |
+| Streaming-process restart recovery | 12.641 s |
 | Invalid records / DLQ messages in contract test | 2 / 2 |
 
 All values above are rendered from `reports/evidence/*.json`. They are local Docker measurements, not production capacity claims.

@@ -23,26 +23,26 @@
     {
       "entity_type": "user",
       "exact_value_mismatches": 0,
-      "expected_rows": 13770,
+      "expected_rows": 6230,
       "floating_point_mismatches": 0,
       "missing_streaming_keys": 0,
       "parity_percentage": 100.0,
       "status": "pass",
-      "streaming_rows": 13770,
+      "streaming_rows": 6230,
       "unexpected_streaming_keys": 0,
-      "watermark": "1998-04-21 00:00:00"
+      "watermark": "1997-12-29 00:00:00"
     },
     {
       "entity_type": "movie",
       "exact_value_mismatches": 0,
-      "expected_rows": 184605,
+      "expected_rows": 85863,
       "floating_point_mismatches": 0,
       "missing_streaming_keys": 0,
       "parity_percentage": 100.0,
       "status": "pass",
-      "streaming_rows": 184605,
+      "streaming_rows": 85863,
       "unexpected_streaming_keys": 0,
-      "watermark": "1998-04-21 00:00:00"
+      "watermark": "1997-12-29 00:00:00"
     }
   ],
   "probe_after_storage_restart": {
@@ -59,18 +59,18 @@
     },
     "movie_stream_features": {
       "duplicate_logical_keys": 0,
-      "maximum_window_end": "1998-04-21 00:00:00",
-      "rows": 184605,
-      "unique_logical_keys": 184605
+      "maximum_window_end": "1997-12-29 00:00:00",
+      "rows": 85863,
+      "unique_logical_keys": 85863
     },
     "status": "pass",
     "table_counts": {
       "local.audit.parity_results": 2,
       "local.audit.pipeline_runs": 2,
       "local.features.movie_batch_features": 189880,
-      "local.features.movie_stream_features": 184605,
+      "local.features.movie_stream_features": 85863,
       "local.features.user_batch_features": 14046,
-      "local.features.user_stream_features": 13770,
+      "local.features.user_stream_features": 6230,
       "local.raw.invalid_rating_events": 0,
       "local.raw.valid_rating_events": 100000
     },
@@ -82,9 +82,9 @@
     },
     "user_stream_features": {
       "duplicate_logical_keys": 0,
-      "maximum_window_end": "1998-04-21 00:00:00",
-      "rows": 13770,
-      "unique_logical_keys": 13770
+      "maximum_window_end": "1997-12-29 00:00:00",
+      "rows": 6230,
+      "unique_logical_keys": 6230
     },
     "valid_event_uniqueness": {
       "duplicate_event_ids": 0,
@@ -106,18 +106,18 @@
     },
     "movie_stream_features": {
       "duplicate_logical_keys": 0,
-      "maximum_window_end": "1998-04-21 00:00:00",
-      "rows": 184605,
-      "unique_logical_keys": 184605
+      "maximum_window_end": "1997-12-29 00:00:00",
+      "rows": 85863,
+      "unique_logical_keys": 85863
     },
     "status": "pass",
     "table_counts": {
       "local.audit.parity_results": 2,
       "local.audit.pipeline_runs": 2,
       "local.features.movie_batch_features": 189880,
-      "local.features.movie_stream_features": 184605,
+      "local.features.movie_stream_features": 85863,
       "local.features.user_batch_features": 14046,
-      "local.features.user_stream_features": 13770,
+      "local.features.user_stream_features": 6230,
       "local.raw.invalid_rating_events": 0,
       "local.raw.valid_rating_events": 100000
     },
@@ -129,9 +129,9 @@
     },
     "user_stream_features": {
       "duplicate_logical_keys": 0,
-      "maximum_window_end": "1998-04-21 00:00:00",
-      "rows": 13770,
-      "unique_logical_keys": 13770
+      "maximum_window_end": "1997-12-29 00:00:00",
+      "rows": 6230,
+      "unique_logical_keys": 6230
     },
     "valid_event_uniqueness": {
       "duplicate_event_ids": 0,
@@ -139,27 +139,27 @@
       "unique_event_ids": 100000
     }
   },
-  "process_restart_recovery_seconds": 12.561999999918044,
+  "process_restart_recovery_seconds": 12.640999999945052,
   "query_run_ids_after_restart": {
-    "movie_feature_aggregation": "928360dd-c6ca-4947-b242-f9958d0f720e",
-    "raw_invalid_ingestion": "3edef298-ff41-4626-b1f0-ea7355889b5f",
-    "raw_valid_ingestion": "411a75aa-b2e3-4aee-803e-1d5d8777c524",
-    "user_feature_aggregation": "a35ec554-6dc2-40bb-9ad8-c40156b42144"
+    "movie_feature_aggregation": "cd60184d-a0b2-4437-953f-0b9ffa653947",
+    "raw_invalid_ingestion": "04e800c9-debc-487b-b172-7ba0c5068743",
+    "raw_valid_ingestion": "b100387d-9726-4093-8192-d3ebf732b17f",
+    "user_feature_aggregation": "cfe1697f-7373-4aaf-a363-2b7070496563"
   },
   "query_run_ids_before_kill": {
-    "movie_feature_aggregation": "0df65e5a-85df-4aac-b90a-947e03aa0bac",
-    "raw_invalid_ingestion": "47b406b7-b5e0-4e28-9fe1-7de520c1b5e5",
-    "raw_valid_ingestion": "b8635b7d-4b16-4810-8e74-821c982e8842",
-    "user_feature_aggregation": "adfd0d24-6bb1-482c-8043-24b73437d16f"
+    "movie_feature_aggregation": "c7e95cab-896f-4f5d-ac9e-1ef71b940dfb",
+    "raw_invalid_ingestion": "012fae04-d720-4712-8dfa-41dae98fe41e",
+    "raw_valid_ingestion": "12e87f83-2206-4306-af9f-f3b8df878ea6",
+    "user_feature_aggregation": "b78bf1d4-1547-4df5-9f1f-11a048b24919"
   },
-  "recorded_at_utc": "2026-07-27T07:55:10.430427+00:00",
+  "recorded_at_utc": "2026-07-27T09:19:25.517348+00:00",
   "runs": 1,
   "segments": [
     {
       "acknowledged": 26250,
-      "actual_events_per_second": 2999.8147869784234,
+      "actual_events_per_second": 2999.9310938114395,
       "attempted": 26250,
-      "elapsed_seconds": 8.750540237999303,
+      "elapsed_seconds": 8.75020098099958,
       "failed": 0,
       "injected_duplicates": 1250,
       "random_seed": 169849,
@@ -171,9 +171,9 @@
     },
     {
       "acknowledged": 78750,
-      "actual_events_per_second": 2999.9685337014757,
+      "actual_events_per_second": 2999.9896593498866,
       "attempted": 78750,
-      "elapsed_seconds": 26.25027533299999,
+      "elapsed_seconds": 26.25009048100037,
       "failed": 0,
       "injected_duplicates": 3750,
       "random_seed": 169849,
@@ -184,19 +184,19 @@
       "topic": "rating-events"
     }
   ],
-  "started_at_utc": "2026-07-27T07:49:55.415617+00:00",
+  "started_at_utc": "2026-07-27T09:14:08.346055+00:00",
   "status": "pass",
   "storage_restart_counts_preserved": true,
   "streaming_container_after": {
-    "id": "251da0c73b068440cbb794cdf4114c9913a94ea895e57de6de9da8bca3ec9e03",
+    "id": "b669c85deeabc6f6c6dc8fc49a8a7c214faad9c4a46894148e24fe971038aa81",
     "restart_count": 0,
-    "started_at": "2026-07-27T07:51:45.27581426Z",
+    "started_at": "2026-07-27T09:15:56.913459713Z",
     "status": "running"
   },
   "streaming_container_before": {
-    "id": "251da0c73b068440cbb794cdf4114c9913a94ea895e57de6de9da8bca3ec9e03",
+    "id": "b669c85deeabc6f6c6dc8fc49a8a7c214faad9c4a46894148e24fe971038aa81",
     "restart_count": 0,
-    "started_at": "2026-07-27T07:50:53.885428891Z",
+    "started_at": "2026-07-27T09:15:08.230720199Z",
     "status": "running"
   }
 }
