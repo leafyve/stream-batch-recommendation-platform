@@ -1,0 +1,111 @@
+{
+  "after_table_counts": {
+    "local.audit.parity_results": 2,
+    "local.audit.pipeline_runs": 2,
+    "local.features.movie_batch_features": 189880,
+    "local.features.movie_stream_features": 184605,
+    "local.features.user_batch_features": 14046,
+    "local.features.user_stream_features": 13770,
+    "local.raw.invalid_rating_events": 2,
+    "local.raw.valid_rating_events": 100001
+  },
+  "before_table_counts": {
+    "local.audit.parity_results": 2,
+    "local.audit.pipeline_runs": 2,
+    "local.features.movie_batch_features": 189880,
+    "local.features.movie_stream_features": 184605,
+    "local.features.user_batch_features": 14046,
+    "local.features.user_stream_features": 13770,
+    "local.raw.invalid_rating_events": 0,
+    "local.raw.valid_rating_events": 100000
+  },
+  "catalog_contention_regression": {
+    "checkpoint_retry_output_rows": 2,
+    "diagnosis": "Concurrent REST commits returned SQLITE_BUSY from the SQLite catalog.",
+    "fix": "Catalog commits are serialized by the stream driver and the JDBC URL uses busy_timeout=30000 so the REST fixture waits for SQLite's single writer."
+  },
+  "command": "py -3.11 scripts/inject_contract_events.py; py -3.11 scripts/capture_contract_evidence.py",
+  "configuration": {
+    "deliberately_late_valid_records": 1,
+    "invalid_rating_records": 1,
+    "late_event_time_utc": "1990-01-01T00:00:00Z",
+    "malformed_json_records": 1,
+    "published_records": 3
+  },
+  "dataset": {
+    "md5": "0e33842e24a9c977be4e0107933c0723",
+    "name": "MovieLens 100K plus three synthetic schema-contract records"
+  },
+  "environment": "local Docker Desktop Linux containers",
+  "limitations": [
+    "Synthetic contract records verify routing behavior, not arbitrary corrupt payloads.",
+    "Kafka DLQ output is at-least-once; consumers must deduplicate by invalid_record_id."
+  ],
+  "observed": {
+    "dlq_messages": 2,
+    "dlq_partitions": [
+      {
+        "high_watermark": 1,
+        "log_start_offset": 0,
+        "partition": 0
+      },
+      {
+        "high_watermark": 1,
+        "log_start_offset": 0,
+        "partition": 1
+      },
+      {
+        "high_watermark": 0,
+        "log_start_offset": 0,
+        "partition": 2
+      }
+    ],
+    "duplicate_invalid_record_ids": 0,
+    "late_event_query_progress": {
+      "movie_feature_aggregation": {
+        "batch_id": 7,
+        "event_time": {
+          "avg": "1990-01-01T00:00:00.000Z",
+          "max": "1990-01-01T00:00:00.000Z",
+          "min": "1990-01-01T00:00:00.000Z",
+          "watermark": "1998-04-21T23:10:38.000Z"
+        },
+        "num_input_rows": 3,
+        "num_rows_dropped_by_watermark": 1,
+        "source_end_offset": {
+          "rating-events": {
+            "0": 32809,
+            "1": 35650,
+            "2": 36544
+          }
+        }
+      },
+      "user_feature_aggregation": {
+        "batch_id": 7,
+        "event_time": {
+          "avg": "1990-01-01T00:00:00.000Z",
+          "max": "1990-01-01T00:00:00.000Z",
+          "min": "1990-01-01T00:00:00.000Z",
+          "watermark": "1998-04-21T23:10:38.000Z"
+        },
+        "num_input_rows": 3,
+        "num_rows_dropped_by_watermark": 1,
+        "source_end_offset": {
+          "rating-events": {
+            "0": 32809,
+            "1": 35650,
+            "2": 36544
+          }
+        }
+      }
+    },
+    "movie_feature_row_change": 0,
+    "new_invalid_rows": 2,
+    "new_valid_rows": 1,
+    "unique_invalid_record_ids": 2,
+    "user_feature_row_change": 0
+  },
+  "recorded_at_utc": "2026-07-27T08:06:57.762840+00:00",
+  "runs": 1,
+  "status": "pass"
+}
