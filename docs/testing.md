@@ -13,8 +13,9 @@
 - Docker integration tests validate Compose, health, topic configuration, all
   eight readable tables, and logical uniqueness.
 
-Core package coverage is enforced at 85% branch coverage. Thin Spark job entry
-points and external-runtime orchestration are excluded from the unit coverage
+Core package coverage is enforced at 85% combined statement/branch coverage
+with branch measurement enabled. This threshold is not a branch-only metric.
+Thin Spark job entry points and external-runtime orchestration are excluded from the unit coverage
 denominator and covered through Spark/Docker evidence instead.
 
 ## Commands

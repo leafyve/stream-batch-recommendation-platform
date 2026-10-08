@@ -1,6 +1,6 @@
 # Stream-Batch Recommendation Feature Platform
 
-> A locally completed distributed-data infrastructure project using containerised services.
+An independent local data-engineering project using containerised services.
 
 This project turns official GroupLens MovieLens ratings into versioned,
 event-time recommendation features through both streaming and independent
@@ -181,7 +181,7 @@ rate before completing the remaining dataset with deterministic duplicates and
 out-of-order delivery.
 
 <!-- VERIFIED_RESULTS_START -->
-### Verified local results
+### Recorded local benchmark (27 July 2026)
 
 | Evidence | Measured result |
 |---|---:|
@@ -196,10 +196,32 @@ out-of-order delivery.
 | Streaming-process restart recovery | 12.641 s |
 | Invalid records / DLQ messages in contract test | 2 / 2 |
 
-All values above are rendered from `reports/evidence/*.json`. They are local Docker measurements, not production capacity claims.
+All values above are rendered from `reports/evidence/*.json`. They are dated local Docker measurements, not production capacity claims. The finalised parity comparison contains 105,318 user rows and 931,842 movie rows: 1,037,160 feature rows in total.
 <!-- VERIFIED_RESULTS_END -->
 
 See [testing](docs/testing.md) for test boundaries and evidence commands.
+
+### Publication audit (8 October 2026)
+
+The existing checkout passed Ruff, mypy (12 source files), a Docker Compose
+build/start with six healthy services, and all 47 tests: 38 unit, three Spark,
+two live Docker integration, and four checks of recorded evidence. The four
+evidence checks validate saved JSON; they do not rerun the benchmark, SIGKILL,
+DLQ, or storage-restart scenarios.
+
+A fresh parity job against the retained Iceberg tables matched all 126,458
+user and 1,095,665 movie feature rows (1,222,123 total), with no missing,
+unexpected, or value-mismatched rows. This later watermark includes more
+finalised windows than the recorded July benchmark. The live table probe found
+1,000,211 unique valid records, including the benchmark's watermark/contract
+events; it does not represent a fresh 1M replay.
+
+The unit suite reproduced 88.69% combined statement/branch coverage with
+branch measurement enabled; branch-only coverage was 82/100 branches (82%).
+The configured denominator excludes the streaming, batch, Iceberg, parity,
+and platform-probe modules. The 1M producer-rate benchmark and 12.641-second
+SIGKILL measurement were not rerun for publication. Use the commands above
+to reproduce them on a suitable local Docker environment; timings will vary.
 
 ## Failure modes and scaling considerations
 
